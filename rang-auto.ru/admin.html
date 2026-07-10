@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Автоспутник — Панель управления</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a0f;
+      --bg-surface: #111218;
+      --bg-panel: #161720;
+      --text-primary: #e2e8f0;
+      --text-heading: #ffffff;
+      --text-muted: #64748b;
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #ff2a35;
+      --accent-hover: #e40014;
+      --accent-glow: rgba(255, 42, 53, 0.25);
+    }
+    
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(circle at top, #161722 0%, #090a0f 100%);
+      color: var(--text-primary);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /* Login Screen */
+    .login-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .login-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 40px;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+    .login-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-heading);
+    }
+    .login-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    
+    /* Layout */
+    .dashboard {
+      display: none; /* Toggle via JS */
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: justify;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 40px;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-heading);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo svg {
+      color: var(--accent);
+    }
+    
+    /* Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      background: var(--bg-surface);
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+    .tab-btn:hover:not(.active) {
+      color: var(--text-heading);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    /* Forms */
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 8px;
+    }
+    .form-input {
+      width: 100%;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      color: var(--text-heading);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px var(--accent-glow);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px var(--accent-glow);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+      box-shadow: none;
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: none;
+    }
+    .btn-danger {
+      background: #dc2626;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+    }
+    .btn-danger:hover {
+      background: #b91c1c;
+      box-shadow: 0 6px 18px rgba(220, 38, 38, 0.35);
+    }
+
+    /* Tables & Grids */
+    .panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 40px;
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .panel-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin: 0;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th {
+      padding: 16px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-primary);
+      vertical-align: middle;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .car-img-preview {
+      width: 80px;
+      height: 50px;
+      border-radius: 8px;
+      object-cover: cover;
+      object-fit: cover;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+    }
+    .actions-cell {
+      display: flex;
+      gap: 8px;
+    }
+    
+    /* Modals */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      padding: 20px;
+    }
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.6);
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
+    }
+    .modal.active .modal-content {
+      transform: translateY(0);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .modal-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin: 0;
+    }
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .modal-close:hover {
+      color: var(--text-heading);
+    }
+    
+    /* Grid for forms */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    
+    /* Upload Button Styles */
+    .upload-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .upload-preview {
+      width: 100px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      display: none;
+    }
+    
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 200;
+    }
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .toast.error {
+      background: #ef4444;
+      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Form -->
+  <div class="login-container" id="login-container">
+    <div class="login-card">
+      <div class="logo" style="justify-content: center; margin-bottom: 24px;">
+        <svg fill="none" height="24" viewBox="0 0 44 34" width="30">
+          <path d="M2 22L22 2L42 22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+          <path d="M2 32L22 12L42 32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.35" stroke-width="6"/>
+        </svg>
+        Автоспутник
+      </div>
+      <div class="login-title">Авторизация</div>
+      <div class="login-subtitle">Введите пароль для доступа к админ-панели</div>
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label" for="password">Пароль</label>
+          <input class="form-input" id="password" required type="password" placeholder="••••••••"/>
+        </div>
+        <button class="btn" style="width: 100%; justify-content: center;" type="submit">Войти</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard">
+    <div class="header">
+      <a class="logo" href="index.html">
+        <svg fill="none" height="20" viewBox="0 0 44 34" width="26">
+          <path d="M2 22L22 2L42 22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+          <path d="M2 32L22 12L42 32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.35" stroke-width="6"/>
+        </svg>
+        Автоспутник <span style="font-size: 14px; font-weight: 500; opacity: 0.5;">Панель управления</span>
+      </a>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <div class="tab-bar">
+          <button class="tab-btn active" id="tab-cars" onclick="switchPanel('cars')">Каталог авто</button>
+          <button class="tab-btn" id="tab-reviews" onclick="switchPanel('reviews')">Отзывы</button>
+          <button class="tab-btn" id="tab-managers" onclick="switchPanel('managers')">Команда</button>
+        </div>
+        <button class="btn btn-secondary" onclick="handleLogout()">Выйти</button>
+      </div>
+    </div>
+
+    <!-- CARS PANEL -->
+    <div class="panel" id="panel-cars">
+      <div class="panel-header">
+        <h2 class="panel-title">Каталог автомобилей</h2>
+        <button class="btn" onclick="openCarModal()">
+          <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16">
+            <path d="M12 5v14M5 12h14"></path>
+          </svg>
+          Добавить авто
+        </button>
+      </div>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Фото</th>
+              <th>Марка и модель</th>
+              <th>Год</th>
+              <th>Цена</th>
+              <th>Пробег</th>
+              <th>Характеристики</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody id="cars-table-body">
+            <!-- Loaded dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- REVIEWS PANEL -->
+    <div class="panel" id="panel-reviews" style="display: none;">
+      <div class="panel-header">
+        <h2 class="panel-title">Управление отзывами</h2>
+        <button class="btn" onclick="openReviewModal()">
+          <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16">
+            <path d="M12 5v14M5 12h14"></path>
+          </svg>
+          Добавить отзыв
+        </button>
+      </div>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Имя клиента</th>
+              <th>Автомобиль</th>
+              <th>Тип</th>
+              <th>Текст отзыва</th>
+              <th>Медиа</th>
+              <th>Дата</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody id="reviews-table-body">
+            <!-- Loaded dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MANAGERS PANEL -->
+    <div class="panel" id="panel-managers" style="display: none;">
+      <div class="panel-header">
+        <h2 class="panel-title">Управление командой</h2>
+        <button class="btn" onclick="openManagerModal()">
+          <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16">
+            <path d="M12 5v14M5 12h14"></path>
+          </svg>
+          Добавить менеджера
+        </button>
+      </div>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Фото</th>
+              <th>ФИО</th>
+              <th>Должность</th>
+              <th>Отдел</th>
+              <th>Telegram</th>
+              <th>WhatsApp</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody id="managers-table-body">
+            <!-- Loaded dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAR MODAL -->
+  <div class="modal" id="car-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="car-modal-title">Добавить автомобиль</h3>
+        <button class="modal-close" onclick="closeCarModal()">✕</button>
+      </div>
+      <form id="car-form" onsubmit="saveCar(event)">
+        <input type="hidden" id="car-id"/>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="car-make">Марка</label>
+            <input class="form-input" id="car-make" required placeholder="Напр. Kia" type="text"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="car-model">Модель</label>
+            <input class="form-input" id="car-model" required placeholder="Напр. Sportage" type="text"/>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="car-year">Год выпуска</label>
+            <input class="form-input" id="car-year" required placeholder="Напр. 2023" type="text"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="car-price">Цена (с символом ₽)</label>
+            <input class="form-input" id="car-price" required placeholder="Напр. 1 390 000 ₽" type="text"/>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="car-body">Тип кузова</label>
+            <input class="form-input" id="car-body" required placeholder="Напр. Кроссовер" type="text"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="car-mileage">Пробег (с км)</label>
+            <input class="form-input" id="car-mileage" required placeholder="Напр. 52 500 км" type="text"/>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="car-engine">Объем двигателя</label>
+            <input class="form-input" id="car-engine" required placeholder="Напр. 1.6 л" type="text"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="car-hp">Мощность</label>
+            <input class="form-input" id="car-hp" required placeholder="Напр. 136 л.с." type="text"/>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="car-transmission">Коробка передач</label>
+            <input class="form-input" id="car-transmission" required placeholder="Напр. Робот / Автомат" type="text"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="car-fuel">Тип топлива</label>
+            <input class="form-input" id="car-fuel" required placeholder="Напр. Дизель / Бензин" type="text"/>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Изображение автомобиля</label>
+          <div class="upload-container">
+            <button class="btn btn-secondary" type="button" onclick="document.getElementById('car-file-input').click()">Выбрать фото</button>
+            <input type="file" id="car-file-input" style="display:none" accept="image/*" onchange="uploadFile(event, 'car')"/>
+            <input type="hidden" id="car-image-url"/>
+            <img class="upload-preview" id="car-img-preview"/>
+          </div>
+        </div>
+        
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:32px;">
+          <button class="btn btn-secondary" type="button" onclick="closeCarModal()">Отмена</button>
+          <button class="btn" type="submit">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- REVIEW MODAL -->
+  <div class="modal" id="review-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="review-modal-title">Добавить отзыв</h3>
+        <button class="modal-close" onclick="closeReviewModal()">✕</button>
+      </div>
+      <form id="review-form" onsubmit="saveReview(event)">
+        <input type="hidden" id="review-id"/>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="review-name">Имя клиента</label>
+            <input class="form-input" id="review-name" required placeholder="Напр. Александр Г." type="text"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="review-carmodel">Купленный авто</label>
+            <input class="form-input" id="review-carmodel" required placeholder="Напр. Mercedes-Benz GLB" type="text"/>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="review-text">Текст отзыва</label>
+          <textarea class="form-input" id="review-text" style="height: 100px; resize: vertical;" placeholder="Напишите текст отзыва здесь..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="review-videourl">Ссылка на видео YouTube (необязательно)</label>
+          <input class="form-input" id="review-videourl" placeholder="Напр. https://www.youtube.com/embed/dQw4w9WgXcQ" type="text"/>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Или загрузить видеофайл (необязательно)</label>
+          <div class="upload-container">
+            <button class="btn btn-secondary" type="button" onclick="document.getElementById('review-video-file-input').click()">Выбрать видео файл</button>
+            <input type="file" id="review-video-file-input" style="display:none" accept="video/*" onchange="uploadVideoFile(event)"/>
+            <span id="review-video-filename" style="font-size: 13px; color: var(--text-muted); margin-left: 8px;">Видеофайл не выбран</span>
+            <input type="hidden" id="review-uploaded-video-url"/>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Фотография отзыва / Обложка видео</label>
+          <div class="upload-container">
+            <button class="btn btn-secondary" type="button" onclick="document.getElementById('review-file-input').click()">Выбрать файл</button>
+            <input type="file" id="review-file-input" style="display:none" accept="image/*" onchange="uploadFile(event, 'review')"/>
+            <input type="hidden" id="review-media-url"/>
+            <img class="upload-preview" id="review-img-preview"/>
+          </div>
+        </div>
+        
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:32px;">
+          <button class="btn btn-secondary" type="button" onclick="closeReviewModal()">Отмена</button>
+          <button class="btn" type="submit">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MANAGER MODAL -->
+  <div class="modal" id="manager-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="manager-modal-title">Добавить менеджера</h3>
+        <button class="modal-close" onclick="closeManagerModal()">✕</button>
+      </div>
+      <form id="manager-form" onsubmit="saveManager(event)">
+        <input type="hidden" id="manager-id"/>
+        <div class="form-group">
+          <label class="form-label" for="manager-name">ФИО</label>
+          <input class="form-input" id="manager-name" required placeholder="Напр. Еремеев Сергей Анатольевич" type="text"/>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="manager-role">Должность</label>
+            <input class="form-input" id="manager-role" required placeholder="Напр. Старший менеджер" type="text"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="manager-department">Отдел</label>
+            <select class="form-input" id="manager-department" required>
+              <option value="management">Руководство</option>
+              <option value="sales">Отдел продаж</option>
+              <option value="logistics">Логистика и доставка</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="manager-telegram">Ссылка на Telegram (необязательно)</label>
+            <input class="form-input" id="manager-telegram" placeholder="Напр. https://t.me/username" type="text"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="manager-whatsapp">Ссылка на WhatsApp (необязательно)</label>
+            <input class="form-input" id="manager-whatsapp" placeholder="Напр. https://wa.me/79010000000" type="text"/>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Фотография менеджера</label>
+          <div class="upload-container">
+            <button class="btn btn-secondary" type="button" onclick="document.getElementById('manager-file-input').click()">Выбрать фото</button>
+            <input type="file" id="manager-file-input" style="display:none" accept="image/*" onchange="uploadFile(event, 'manager')"/>
+            <input type="hidden" id="manager-image-url"/>
+            <img class="upload-preview" id="manager-img-preview"/>
+          </div>
+        </div>
+        
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:32px;">
+          <button class="btn btn-secondary" type="button" onclick="closeManagerModal()">Отмена</button>
+          <button class="btn" type="submit">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">Операция выполнена успешно!</div>
+
+  <script>
+    let carsData = [];
+    let reviewsData = [];
+    let managersData = [];
+    
+    // Auth Check on Load
+    document.addEventListener('DOMContentLoaded', () => {
+      const token = localStorage.getItem('admin_token');
+      if (token) {
+        showDashboard();
+      } else {
+        showLogin();
+      }
+    });
+
+    const getHeaders = () => {
+      return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
+      };
+    };
+
+    // Toast show helper
+    const showToast = (text, isError = false) => {
+      const toast = document.getElementById('toast');
+      toast.textContent = text;
+      if (isError) {
+        toast.classList.add('error');
+      } else {
+        toast.classList.remove('error');
+      }
+      toast.classList.add('active');
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3000);
+    };
+
+    // Auth Flows
+    const showLogin = () => {
+      document.getElementById('login-container').style.display = 'flex';
+      document.getElementById('dashboard').style.display = 'none';
+    };
+
+    const showDashboard = () => {
+      document.getElementById('login-container').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      loadCars();
+      loadReviews();
+      loadManagers();
+    };
+
+    const handleLogin = async (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
+        });
+        const data = await res.json();
+        
+        if (res.ok) {
+          localStorage.setItem('admin_token', data.token);
+          showToast('Успешный вход!');
+          showDashboard();
+        } else {
+          showToast(data.error || 'Ошибка входа', true);
+        }
+      } catch (err) {
+        showToast('Ошибка сети при входе', true);
+      }
+    };
+
+    const handleLogout = () => {
+      localStorage.removeItem('admin_token');
+      showToast('Вы вышли из системы');
+      showLogin();
+    };
+
+    // Panel Switching
+    const switchPanel = (panelName) => {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`tab-${panelName}`).classList.add('active');
+      
+      document.getElementById('panel-cars').style.display = panelName === 'cars' ? 'block' : 'none';
+      document.getElementById('panel-reviews').style.display = panelName === 'reviews' ? 'block' : 'none';
+      document.getElementById('panel-managers').style.display = panelName === 'managers' ? 'block' : 'none';
+    };
+
+    // --- CARS MANAGEMENT ---
+    const loadCars = async () => {
+      try {
+        const res = await fetch('/api/cars');
+        carsData = await res.json();
+        renderCarsTable();
+      } catch (err) {
+        showToast('Не удалось загрузить каталог', true);
+      }
+    };
+
+    const renderCarsTable = () => {
+      const tbody = document.getElementById('cars-table-body');
+      tbody.innerHTML = carsData.map(car => `
+        <tr>
+          <td><img src="${car.image}" class="car-img-preview" alt="Car"/></td>
+          <td style="font-weight: 700; color: white;">${car.make} ${car.model}</td>
+          <td>${car.year}</td>
+          <td style="color: var(--accent); font-weight: 700;">${car.price}</td>
+          <td>${car.mileage}</td>
+          <td style="font-size: 12px; color: var(--text-muted)">
+            ${car.engine} · ${car.hp} · ${car.transmission} · ${car.fuel}
+          </td>
+          <td>
+            <div class="actions-cell">
+              <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="editCar('${car.id}')">Ред.</button>
+              <button class="btn btn-danger" style="padding: 6px 12px; font-size: 12px;" onclick="deleteCar('${car.id}')">Удал.</button>
+            </div>
+          </td>
+        </tr>
+      `).join('') || '<tr><td colspan="7" style="text-align:center; padding: 30px; color: var(--text-muted)">Автомобили отсутствуют. Нажмите кнопку выше, чтобы добавить.</td></tr>';
+    };
+
+    const openCarModal = () => {
+      document.getElementById('car-modal-title').textContent = 'Добавить автомобиль';
+      document.getElementById('car-form').reset();
+      document.getElementById('car-id').value = '';
+      document.getElementById('car-image-url').value = '';
+      document.getElementById('car-img-preview').style.display = 'none';
+      document.getElementById('car-modal').classList.add('active');
+    };
+
+    const closeCarModal = () => {
+      document.getElementById('car-modal').classList.remove('active');
+    };
+
+    const editCar = (id) => {
+      const car = carsData.find(c => c.id === id);
+      if (!car) return;
+      
+      document.getElementById('car-modal-title').textContent = 'Редактировать автомобиль';
+      document.getElementById('car-id').value = car.id;
+      document.getElementById('car-make').value = car.make;
+      document.getElementById('car-model').value = car.model;
+      document.getElementById('car-year').value = car.year;
+      document.getElementById('car-price').value = car.price;
+      document.getElementById('car-body').value = car.bodyType;
+      document.getElementById('car-mileage').value = car.mileage;
+      document.getElementById('car-engine').value = car.engine;
+      document.getElementById('car-hp').value = car.hp;
+      document.getElementById('car-transmission').value = car.transmission;
+      document.getElementById('car-fuel').value = car.fuel;
+      
+      document.getElementById('car-image-url').value = car.image;
+      const preview = document.getElementById('car-img-preview');
+      preview.src = car.image;
+      preview.style.display = 'block';
+      
+      document.getElementById('car-modal').classList.add('active');
+    };
+
+    const saveCar = async (e) => {
+      e.preventDefault();
+      const carId = document.getElementById('car-id').value;
+      const payload = {
+        make: document.getElementById('car-make').value,
+        model: document.getElementById('car-model').value,
+        year: document.getElementById('car-year').value,
+        price: document.getElementById('car-price').value,
+        bodyType: document.getElementById('car-body').value,
+        mileage: document.getElementById('car-mileage').value,
+        engine: document.getElementById('car-engine').value,
+        hp: document.getElementById('car-hp').value,
+        transmission: document.getElementById('car-transmission').value,
+        fuel: document.getElementById('car-fuel').value,
+        image: document.getElementById('car-image-url').value || 'https://via.placeholder.com/800x500?text=No+Photo'
+      };
+
+      const url = carId ? `/api/cars/${carId}` : '/api/cars';
+      const method = carId ? 'PUT' : 'POST';
+
+      try {
+        const res = await fetch(url, {
+          method: method,
+          headers: getHeaders(),
+          body: JSON.stringify(payload)
+        });
+        
+        if (res.ok) {
+          showToast(carId ? 'Данные автомобиля обновлены!' : 'Автомобиль добавлен в каталог!');
+          closeCarModal();
+          loadCars();
+        } else {
+          showToast('Ошибка при сохранении автомобиля', true);
+        }
+      } catch (err) {
+        showToast('Ошибка соединения', true);
+      }
+    };
+
+    const deleteCar = async (id) => {
+      if (!confirm('Вы уверены, что хотите удалить этот автомобиль из каталога?')) return;
+      try {
+        const res = await fetch(`/api/cars/${id}`, {
+          method: 'DELETE',
+          headers: getHeaders()
+        });
+        if (res.ok) {
+          showToast('Автомобиль удален!');
+          loadCars();
+        } else {
+          showToast('Ошибка удаления', true);
+        }
+      } catch (err) {
+        showToast('Ошибка соединения', true);
+      }
+    };
+
+    // --- REVIEWS MANAGEMENT ---
+    const loadReviews = async () => {
+      try {
+        const res = await fetch('/api/reviews');
+        reviewsData = await res.json();
+        renderReviewsTable();
+      } catch (err) {
+        showToast('Не удалось загрузить отзывы', true);
+      }
+    };
+
+    const renderReviewsTable = () => {
+      const tbody = document.getElementById('reviews-table-body');
+      tbody.innerHTML = reviewsData.map(r => `
+        <tr>
+          <td style="font-weight: 700; color: white;">${r.name}</td>
+          <td>${r.carModel}</td>
+          <td>
+            <span style="font-size:11px; padding: 4px 8px; border-radius: 6px; font-weight: 700; background: ${r.type === 'video' ? 'rgba(239, 68, 68, 0.15); color: #ef4444;' : 'rgba(16, 185, 129, 0.15); color: #10b981;'}">
+              ${r.type === 'video' ? 'Видео' : 'Фото'}
+            </span>
+          </td>
+          <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${r.text}</td>
+          <td>
+            <img src="${r.mediaUrl}" class="car-img-preview" alt="Review Media"/>
+          </td>
+          <td>${r.date}</td>
+          <td>
+            <div class="actions-cell">
+              <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="editReview('${r.id}')">Ред.</button>
+              <button class="btn btn-danger" style="padding: 6px 12px; font-size: 12px;" onclick="deleteReview('${r.id}')">Удал.</button>
+            </div>
+          </td>
+        </tr>
+      `).join('') || '<tr><td colspan="7" style="text-align:center; padding: 30px; color: var(--text-muted)">Отзывы отсутствуют. Нажмите кнопку выше, чтобы добавить.</td></tr>';
+    };
+
+    const openReviewModal = () => {
+      document.getElementById('review-modal-title').textContent = 'Добавить отзыв';
+      document.getElementById('review-form').reset();
+      document.getElementById('review-id').value = '';
+      document.getElementById('review-media-url').value = '';
+      document.getElementById('review-img-preview').style.display = 'none';
+      
+      // Reset video file labels and values
+      document.getElementById('review-uploaded-video-url').value = '';
+      document.getElementById('review-video-filename').textContent = 'Видеофайл не выбран';
+      document.getElementById('review-video-filename').style.color = 'var(--text-muted)';
+      
+      document.getElementById('review-modal').classList.add('active');
+    };
+
+    const closeReviewModal = () => {
+      document.getElementById('review-modal').classList.remove('active');
+    };
+
+    const editReview = (id) => {
+      const review = reviewsData.find(r => r.id === id);
+      if (!review) return;
+      
+      document.getElementById('review-modal-title').textContent = 'Редактировать отзыв';
+      document.getElementById('review-id').value = review.id;
+      document.getElementById('review-name').value = review.name;
+      document.getElementById('review-carmodel').value = review.carModel;
+      document.getElementById('review-text').value = review.text || '';
+      
+      // YouTube URL vs Direct Video file check
+      const isDirectVideo = review.videoUrl && !review.videoUrl.includes('youtube.com') && !review.videoUrl.includes('youtu.be') && !review.videoUrl.includes('embed');
+      if (isDirectVideo) {
+        document.getElementById('review-videourl').value = '';
+        document.getElementById('review-uploaded-video-url').value = review.videoUrl;
+        document.getElementById('review-video-filename').textContent = 'Видеофайл загружен';
+        document.getElementById('review-video-filename').style.color = '#10b981';
+      } else {
+        document.getElementById('review-videourl').value = review.videoUrl || '';
+        document.getElementById('review-uploaded-video-url').value = '';
+        document.getElementById('review-video-filename').textContent = 'Видеофайл не выбран';
+        document.getElementById('review-video-filename').style.color = 'var(--text-muted)';
+      }
+      
+      document.getElementById('review-media-url').value = review.mediaUrl;
+      const preview = document.getElementById('review-img-preview');
+      preview.src = review.mediaUrl;
+      preview.style.display = 'block';
+      
+      document.getElementById('review-modal').classList.add('active');
+    };
+
+    const formatYoutubeUrl = (url) => {
+      if (!url) return '';
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      if (match && match[2].length === 11) {
+        return 'https://www.youtube.com/embed/' + match[2];
+      }
+      return url;
+    };
+
+    const saveReview = async (e) => {
+      e.preventDefault();
+      const reviewId = document.getElementById('review-id').value;
+      const rawVideoUrl = document.getElementById('review-videourl').value.trim();
+      const uploadedVideoUrl = document.getElementById('review-uploaded-video-url').value.trim();
+      
+      // Priority: uploaded video file, then YouTube video URL
+      const finalVideoUrl = uploadedVideoUrl || formatYoutubeUrl(rawVideoUrl);
+      const type = finalVideoUrl ? 'video' : 'photo';
+      const payload = {
+        name: document.getElementById('review-name').value,
+        carModel: document.getElementById('review-carmodel').value,
+        type: type,
+        text: document.getElementById('review-text').value,
+        mediaUrl: document.getElementById('review-media-url').value || 'https://via.placeholder.com/600x400?text=No+Photo',
+        videoUrl: finalVideoUrl
+      };
+
+      const url = reviewId ? `/api/reviews/${reviewId}` : '/api/reviews';
+      const method = reviewId ? 'PUT' : 'POST';
+
+      try {
+        const res = await fetch(url, {
+          method: method,
+          headers: getHeaders(),
+          body: JSON.stringify(payload)
+        });
+        
+        if (res.ok) {
+          showToast(reviewId ? 'Отзыв обновлен!' : 'Отзыв успешно добавлен!');
+          closeReviewModal();
+          loadReviews();
+        } else {
+          showToast('Ошибка при сохранении отзыва', true);
+        }
+      } catch (err) {
+        showToast('Ошибка соединения', true);
+      }
+    };
+
+    const deleteReview = async (id) => {
+      if (!confirm('Вы уверены, что хотите удалить этот отзыв?')) return;
+      try {
+        const res = await fetch(`/api/reviews/${id}`, {
+          method: 'DELETE',
+          headers: getHeaders()
+        });
+        if (res.ok) {
+          showToast('Отзыв удален!');
+          loadReviews();
+        } else {
+          showToast('Ошибка удаления', true);
+        }
+      } catch (err) {
+        showToast('Ошибка соединения', true);
+      }
+    };
+
+    // --- MANAGERS MANAGEMENT ---
+    const loadManagers = async () => {
+      try {
+        const res = await fetch('/api/managers');
+        managersData = await res.json();
+        renderManagersTable();
+      } catch (err) {
+        showToast('Не удалось загрузить список команды', true);
+      }
+    };
+
+    const getDepartmentLabel = (dep) => {
+      switch (dep) {
+        case 'management': return 'Руководство';
+        case 'sales': return 'Отдел продаж';
+        case 'logistics': return 'Логистика и доставка';
+        default: return dep;
+      }
+    };
+
+    const renderManagersTable = () => {
+      const tbody = document.getElementById('managers-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = managersData.map(m => `
+        <tr>
+          <td><img src="${m.image}" class="car-img-preview" alt="${m.name}"/></td>
+          <td style="font-weight: 600; color: var(--text-heading);">${m.name}</td>
+          <td>${m.role}</td>
+          <td><span style="background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 6px; font-size: 12px;">${getDepartmentLabel(m.department)}</span></td>
+          <td>${m.telegram ? `<a href="${m.telegram}" target="_blank" style="color: var(--accent); text-decoration: none;">Link</a>` : '—'}</td>
+          <td>${m.whatsapp ? `<a href="${m.whatsapp}" target="_blank" style="color: var(--accent); text-decoration: none;">Link</a>` : '—'}</td>
+          <td>
+            <div class="actions-cell">
+              <button class="btn btn-secondary" onclick="editManager('${m.id}')" style="padding: 6px 12px; font-size: 12px;">Изменить</button>
+              <button class="btn btn-danger" onclick="deleteManager('${m.id}')" style="padding: 6px 12px; font-size: 12px;">Удалить</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    };
+
+    const openManagerModal = () => {
+      document.getElementById('manager-form').reset();
+      document.getElementById('manager-id').value = '';
+      document.getElementById('manager-modal-title').textContent = 'Добавить менеджера';
+      document.getElementById('manager-image-url').value = '';
+      document.getElementById('manager-img-preview').style.display = 'none';
+      document.getElementById('manager-modal').classList.add('active');
+    };
+
+    const closeManagerModal = () => {
+      document.getElementById('manager-modal').classList.remove('active');
+    };
+
+    const editManager = (id) => {
+      const manager = managersData.find(m => m.id === id);
+      if (!manager) return;
+      
+      document.getElementById('manager-modal-title').textContent = 'Редактировать менеджера';
+      document.getElementById('manager-id').value = manager.id;
+      document.getElementById('manager-name').value = manager.name;
+      document.getElementById('manager-role').value = manager.role;
+      document.getElementById('manager-department').value = manager.department;
+      document.getElementById('manager-telegram').value = manager.telegram || '';
+      document.getElementById('manager-whatsapp').value = manager.whatsapp || '';
+      
+      document.getElementById('manager-image-url').value = manager.image;
+      const preview = document.getElementById('manager-img-preview');
+      preview.src = manager.image;
+      preview.style.display = 'block';
+      
+      document.getElementById('manager-modal').classList.add('active');
+    };
+
+    const saveManager = async (e) => {
+      e.preventDefault();
+      const managerId = document.getElementById('manager-id').value;
+      const payload = {
+        name: document.getElementById('manager-name').value,
+        role: document.getElementById('manager-role').value,
+        department: document.getElementById('manager-department').value,
+        telegram: document.getElementById('manager-telegram').value,
+        whatsapp: document.getElementById('manager-whatsapp').value,
+        image: document.getElementById('manager-image-url').value || 'https://via.placeholder.com/150?text=No+Photo'
+      };
+
+      const url = managerId ? `/api/managers/${managerId}` : '/api/managers';
+      const method = managerId ? 'PUT' : 'POST';
+
+      try {
+        const res = await fetch(url, {
+          method: method,
+          headers: getHeaders(),
+          body: JSON.stringify(payload)
+        });
+        
+        if (res.ok) {
+          showToast(managerId ? 'Данные менеджера обновлены!' : 'Менеджер успешно добавлен!');
+          closeManagerModal();
+          loadManagers();
+        } else {
+          showToast('Ошибка при сохранении данных', true);
+        }
+      } catch (err) {
+        showToast('Ошибка соединения', true);
+      }
+    };
+
+    const deleteManager = async (id) => {
+      if (!confirm('Вы уверены, что хотите удалить этого менеджера?')) return;
+      try {
+        const res = await fetch(`/api/managers/${id}`, {
+          method: 'DELETE',
+          headers: getHeaders()
+        });
+        if (res.ok) {
+          showToast('Менеджер удален!');
+          loadManagers();
+        } else {
+          showToast('Ошибка удаления', true);
+        }
+      } catch (err) {
+        showToast('Ошибка соединения', true);
+      }
+    };
+
+    // --- FILE UPLOADS ---
+    const uploadFile = async (e, type) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        showToast('Загрузка файла...');
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
+          },
+          body: formData
+        });
+        const data = await res.json();
+        
+        if (res.ok) {
+          showToast('Файл успешно загружен!');
+          const hiddenInput = document.getElementById(`${type}-media-url`) || document.getElementById(`${type}-image-url`);
+          const imgPreview = document.getElementById(`${type}-img-preview`);
+          
+          hiddenInput.value = data.fileUrl;
+          imgPreview.src = data.fileUrl;
+          imgPreview.style.display = 'block';
+        } else {
+          showToast(data.error || 'Ошибка загрузки файла', true);
+        }
+      } catch (err) {
+        showToast('Не удалось загрузить файл', true);
+      }
+    };
+
+    const uploadVideoFile = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        showToast('Загрузка видеофайла...');
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
+          },
+          body: formData
+        });
+        const data = await res.json();
+        
+        if (res.ok) {
+          showToast('Видеофайл успешно загружен!');
+          document.getElementById('review-uploaded-video-url').value = data.fileUrl;
+          document.getElementById('review-video-filename').textContent = file.name + ' (загружено)';
+          document.getElementById('review-video-filename').style.color = '#10b981';
+        } else {
+          showToast(data.error || 'Ошибка загрузки видео', true);
+        }
+      } catch (err) {
+        showToast('Не удалось загрузить видео', true);
+      }
+    };
+  </script>
+</body>
+</html>

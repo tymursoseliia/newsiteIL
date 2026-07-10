@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "name": "Трусов Олег Александрович",
+    "role": "Генеральный директор",
+    "department": "management",
+    "image": "/uploads/manager-trusov.jpg",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  },
+  {
+    "id": "2",
+    "name": "Филипова Анна Сергеевна",
+    "role": "Руководитель отдела продаж",
+    "department": "management",
+    "image": "/uploads/manager-filipova.png",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  },
+  {
+    "id": "3",
+    "name": "Головизин Виктор Александрович",
+    "role": "Руководитель отдела логистики",
+    "department": "management",
+    "image": "/uploads/manager-golovizin.png",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  },
+  {
+    "id": "4",
+    "name": "Устинов Максим Дмитриевич",
+    "role": "Старший менеджер по подбору",
+    "department": "sales",
+    "image": "/uploads/manager-ustinov.png",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  },
+  {
+    "id": "5",
+    "name": "Попова Екатерина Евгеньевна",
+    "role": "Менеджер по работе с клиентами",
+    "department": "sales",
+    "image": "/uploads/manager-popova.png",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  },
+  {
+    "id": "6",
+    "name": "Гамарцев Юрий Владимирович",
+    "role": "Ведущий менеджер по подбору",
+    "department": "sales",
+    "image": "/uploads/manager-gamartsev.png",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  },
+  {
+    "id": "7",
+    "name": "Венидиктова Дарья Владимировна",
+    "role": "Специалист отдела логистики и ВЭД",
+    "department": "logistics",
+    "image": "/uploads/manager-venidiktova.jpg",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  },
+  {
+    "id": "8",
+    "name": "Клочихин Анатолий Андреевич",
+    "role": "Эксперт по оценке автомобилей",
+    "department": "logistics",
+    "image": "/uploads/manager-klochikhin.png",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  },
+  {
+    "id": "9",
+    "name": "Иванкин Денис Викторович",
+    "role": "Специалист по выездному осмотру и подбору",
+    "department": "logistics",
+    "image": "/uploads/manager-ivankin.jpg",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  },
+  {
+    "id": "10",
+    "name": "Сергей Анатольевич Еремеев",
+    "role": "Специалист по доставке и таможенному оформлению",
+    "department": "logistics",
+    "image": "/uploads/manager-eremeev.png",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  }
+]

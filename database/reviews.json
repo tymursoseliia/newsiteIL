@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Александр Г.",
+    "carModel": "Mercedes-Benz GLB",
+    "type": "photo",
+    "text": "Машина приехала в идеальном состоянии, точно в оговоренные сроки. Полное сопровождение сделки и помощь с оформлением! Очень рекомендую «Ранг» за их прозрачность.",
+    "mediaUrl": "/uploads/cars/217/img-1783430420180-0.jpg",
+    "date": "04.07.2026"
+  },
+  {
+    "id": "2",
+    "name": "Мария К.",
+    "carModel": "Kia Sportage",
+    "type": "photo",
+    "text": "Спасибо огромное команде за отличный Sportage! Быстро подобрали подходящий вариант в Европе, подробно показывали отчеты о проверках. Очень довольна покупкой!",
+    "mediaUrl": "/uploads/cars/218/img-1783434062068-0.jpg",
+    "date": "30.06.2026"
+  },
+  {
+    "id": "3",
+    "name": "Дмитрий В.",
+    "carModel": "Toyota Proace City",
+    "type": "video",
+    "text": "Видео-отзыв о покупке семейного минивэна через Ранг Авто. Все этапы от подбора до выдачи в Казани.",
+    "mediaUrl": "/uploads/cars/215/img-1783423650518-0.jpg",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "date": "15.06.2026"
+  },
+  {
+    "id": "4",
+    "name": "Сергей П.",
+    "carModel": "Ford Puma",
+    "type": "video",
+    "text": "Обзор автомобиля Ford Puma Titanium, доставленного из Европы под ключ.",
+    "mediaUrl": "/uploads/cars/214/img-1783420194176-0.jpg",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "date": "08.06.2026"
+  },
+  {
+    "id": "1783510674717",
+    "date": "08.07.2026",
+    "name": "TestTest Client",
+    "carModel": "Audi Q8Audi Q8",
+    "type": "photo",
+    "text": "All is super! Strongly recommend.",
+    "mediaUrl": "https://via.placeholder.com/600x400?text=No+Photo",
+    "videoUrl": ""
+  }
+]

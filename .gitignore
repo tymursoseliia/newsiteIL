@@ -1,0 +1,5 @@
+node_modules/
+.env
+.antigravityignore
+.tempmediaStorage/
+*.log
