@@ -11,7 +11,7 @@
     "transmission": "Робот",
     "fuel": "Дизель",
     "price": "1 390 000 ₽",
-    "image": "/uploads/cars/219/img-1783435253921-0.jpg"
+    "image": "https://images.unsplash.com/photo-1708538784860-2646d6eb10f7?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "218",
@@ -25,7 +25,7 @@
     "transmission": "Робот",
     "fuel": "Дизель",
     "price": "1 450 000 ₽",
-    "image": "/uploads/cars/218/img-1783434062068-0.jpg"
+    "image": "https://images.unsplash.com/photo-1708538784860-2646d6eb10f7?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "217",
@@ -39,7 +39,7 @@
     "transmission": "Робот",
     "fuel": "Дизель",
     "price": "2 590 000 ₽",
-    "image": "/uploads/cars/217/img-1783430420180-0.jpg"
+    "image": "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "216",
@@ -53,7 +53,7 @@
     "transmission": "Механика",
     "fuel": "Дизель",
     "price": "1 890 000 ₽",
-    "image": "/uploads/cars/216/img-1783426114708-0.jpg"
+    "image": "https://images.unsplash.com/photo-1518364538800-6bcb3f25da49?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "215",
@@ -67,7 +67,7 @@
     "transmission": "Автомат",
     "fuel": "Дизель",
     "price": "1 990 000 ₽",
-    "image": "/uploads/cars/215/img-1783423650518-0.jpg"
+    "image": "https://images.unsplash.com/photo-1518364538800-6bcb3f25da49?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "214",
@@ -81,6 +81,6 @@
     "transmission": "Робот",
     "fuel": "Бензин",
     "price": "1 790 000 ₽",
-    "image": "/uploads/cars/214/img-1783420194176-0.jpg"
+    "image": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80"
   }
 ]
