@@ -880,7 +880,12 @@
           closeCarModal();
           loadCars();
         } else {
-          showToast('Ошибка при сохранении автомобиля', true);
+          if (res.status === 401) {
+            showToast('Сессия истекла. Пожалуйста, авторизуйтесь заново.', true);
+            handleLogout();
+          } else {
+            showToast('Ошибка при сохранении автомобиля', true);
+          }
         }
       } catch (err) {
         showToast('Ошибка соединения', true);
@@ -898,7 +903,12 @@
           showToast('Автомобиль удален!');
           loadCars();
         } else {
-          showToast('Ошибка удаления', true);
+          if (res.status === 401) {
+            showToast('Сессия истекла. Пожалуйста, авторизуйтесь заново.', true);
+            handleLogout();
+          } else {
+            showToast('Ошибка удаления', true);
+          }
         }
       } catch (err) {
         showToast('Ошибка соединения', true);
@@ -1036,7 +1046,12 @@
           closeReviewModal();
           loadReviews();
         } else {
-          showToast('Ошибка при сохранении отзыва', true);
+          if (res.status === 401) {
+            showToast('Сессия истекла. Пожалуйста, авторизуйтесь заново.', true);
+            handleLogout();
+          } else {
+            showToast('Ошибка при сохранении отзыва', true);
+          }
         }
       } catch (err) {
         showToast('Ошибка соединения', true);
@@ -1054,7 +1069,12 @@
           showToast('Отзыв удален!');
           loadReviews();
         } else {
-          showToast('Ошибка удаления', true);
+          if (res.status === 401) {
+            showToast('Сессия истекла. Пожалуйста, авторизуйтесь заново.', true);
+            handleLogout();
+          } else {
+            showToast('Ошибка удаления', true);
+          }
         }
       } catch (err) {
         showToast('Ошибка соединения', true);
@@ -1162,7 +1182,12 @@
           closeManagerModal();
           loadManagers();
         } else {
-          showToast('Ошибка при сохранении данных', true);
+          if (res.status === 401) {
+            showToast('Сессия истекла. Пожалуйста, авторизуйтесь заново.', true);
+            handleLogout();
+          } else {
+            showToast('Ошибка при сохранении данных', true);
+          }
         }
       } catch (err) {
         showToast('Ошибка соединения', true);
@@ -1180,7 +1205,12 @@
           showToast('Менеджер удален!');
           loadManagers();
         } else {
-          showToast('Ошибка удаления', true);
+          if (res.status === 401) {
+            showToast('Сессия истекла. Пожалуйста, авторизуйтесь заново.', true);
+            handleLogout();
+          } else {
+            showToast('Ошибка удаления', true);
+          }
         }
       } catch (err) {
         showToast('Ошибка соединения', true);
