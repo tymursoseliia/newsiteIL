@@ -3,13 +3,28 @@
   functions = "netlify/functions"
 
 [[redirects]]
+  from = "/api/cars/*"
+  to = "/.netlify/functions/cars"
+  status = 200
+
+[[redirects]]
   from = "/api/cars"
   to = "/.netlify/functions/cars"
   status = 200
 
 [[redirects]]
+  from = "/api/reviews/*"
+  to = "/.netlify/functions/reviews"
+  status = 200
+
+[[redirects]]
   from = "/api/reviews"
   to = "/.netlify/functions/reviews"
+  status = 200
+
+[[redirects]]
+  from = "/api/managers/*"
+  to = "/.netlify/functions/managers"
   status = 200
 
 [[redirects]]

@@ -1,46 +1,99 @@
-const fs = require('fs');
-const path = require('path');
+const { createClient } = require('@supabase/supabase-js');
 
-const URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://bjberojkphzoebrrjssc.supabase.co';
+const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || 'sb_secret_yUWheIGkENHRyXWziM3uAQ_WYECTSe9';
+const supabase = createClient(URL, KEY);
+
+const ADMIN_TOKEN = 'secret_admin_token_9823472';
+
+function isAuthorized(event) {
+  const authHeader = event.headers['authorization'] || event.headers['Authorization'];
+  return authHeader === `Bearer ${ADMIN_TOKEN}`;
+}
 
 exports.handler = async (event, context) => {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Content-Type': 'application/json'
+  };
+
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers };
+  }
+
+  const pathParts = event.path.split('/');
+  const lastPart = pathParts[pathParts.length - 1];
+  const id = lastPart && lastPart !== 'cars' ? lastPart : null;
+
   try {
-    if (URL && KEY) {
-      const response = await fetch(`${URL}/rest/v1/cars?select=*&order=created_at.asc`, {
-        headers: {
-          'apikey': KEY,
-          'Authorization': `Bearer ${KEY}`
+    switch (event.httpMethod) {
+      case 'GET':
+        const { data: cars, error: getErr } = await supabase
+          .from('cars')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        if (getErr) throw new Error(getErr.message);
+        return { statusCode: 200, headers, body: JSON.stringify(cars) };
+
+      case 'POST':
+        if (!isAuthorized(event)) {
+          return { statusCode: 401, headers, body: JSON.stringify({ error: 'Unauthorized' }) };
         }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        return {
-          statusCode: 200,
-          headers: { 
-            'Content-Type': 'application/json', 
-            'Access-Control-Allow-Origin': '*' 
-          },
-          body: JSON.stringify(data)
+        const newCar = {
+          id: Date.now().toString(),
+          ...JSON.parse(event.body)
         };
-      }
+        const { data: insertedCar, error: postErr } = await supabase
+          .from('cars')
+          .insert(newCar)
+          .select();
+        
+        if (postErr) throw new Error(postErr.message);
+        return { statusCode: 201, headers, body: JSON.stringify(insertedCar[0] || newCar) };
+
+      case 'PUT':
+        if (!isAuthorized(event)) {
+          return { statusCode: 401, headers, body: JSON.stringify({ error: 'Unauthorized' }) };
+        }
+        if (!id) {
+          return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing car ID' }) };
+        }
+        const updateData = JSON.parse(event.body);
+        const { data: updatedCar, error: putErr } = await supabase
+          .from('cars')
+          .update(updateData)
+          .eq('id', id)
+          .select();
+        
+        if (putErr) throw new Error(putErr.message);
+        return { statusCode: 200, headers, body: JSON.stringify(updatedCar[0] || updateData) };
+
+      case 'DELETE':
+        if (!isAuthorized(event)) {
+          return { statusCode: 401, headers, body: JSON.stringify({ error: 'Unauthorized' }) };
+        }
+        if (!id) {
+          return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing car ID' }) };
+        }
+        const { error: delErr } = await supabase
+          .from('cars')
+          .delete()
+          .eq('id', id);
+        
+        if (delErr) throw new Error(delErr.message);
+        return { statusCode: 200, headers, body: JSON.stringify({ message: 'Car deleted' }) };
+
+      default:
+        return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method Not Allowed' }) };
     }
-    
-    // Fallback to local JSON file
-    const filePath = path.join(process.cwd(), 'database', 'cars.json');
-    const data = fs.readFileSync(filePath, 'utf8');
-    return {
-      statusCode: 200,
-      headers: { 
-        'Content-Type': 'application/json', 
-        'Access-Control-Allow-Origin': '*' 
-      },
-      body: data
-    };
   } catch (err) {
+    console.error('Error in cars netlify function:', err.message);
     return {
       statusCode: 500,
-      headers: { 'Access-Control-Allow-Origin': '*' },
+      headers,
       body: JSON.stringify({ error: err.message })
     };
   }
