@@ -76,7 +76,7 @@
     "name": "Иванкин Денис Викторович",
     "role": "Специалист по выездному осмотру и подбору",
     "department": "logistics",
-    "image": "/uploads/manager-ivankin.jpg",
+    "image": "/uploads/manager-ivankin.png",
     "telegram": "https://t.me/rang_auto",
     "whatsapp": "https://wa.me/79016209645"
   },
@@ -86,6 +86,15 @@
     "role": "Специалист по доставке и таможенному оформлению",
     "department": "logistics",
     "image": "/uploads/manager-eremeev.png",
+    "telegram": "https://t.me/rang_auto",
+    "whatsapp": "https://wa.me/79016209645"
+  },
+  {
+    "id": "11",
+    "name": "Надеждин Роман Анатольевич",
+    "role": "",
+    "department": "logistics",
+    "image": "/uploads/manager-nadezhdin.png",
     "telegram": "https://t.me/rang_auto",
     "whatsapp": "https://wa.me/79016209645"
   }
