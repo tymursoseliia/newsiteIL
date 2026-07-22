@@ -374,7 +374,7 @@ const aboutBody = `
       <div class="text-gray-300 space-y-5 leading-relaxed">
         <p>Мы специализируемся на профессиональном поиске, проверке технического состояния и безопасной логистике легковых автомобилей из Германии, Швеции и других стран Евросоюза.</p>
         <p><strong>ООО «Автоспутник»</strong> — это команда экспертов, гарантирующая юридическую чистоту сделки, точную оценку состояния кузова и двигателя, а также полное таможенное оформление «под ключ».</p>
-        <p>Наш офис находится в Волгограде, но мы доставляем автомобили клиентам по всей территории Российской Федерации.</p>
+        <p>Наш офис находится в г. Лида, но мы доставляем автомобили клиентам по всей территории Российской Федерации.</p>
       </div>
       <div class="rounded-2xl border border-white/5 overflow-hidden aspect-[4/3] bg-white/5 relative">
         <div class="absolute inset-0 bg-gradient-to-tr from-black/80 to-transparent z-10"></div>
@@ -554,7 +554,8 @@ const contactsBody = `
             ООО «Автоспутник»<br>
             ИНН: 3443140210<br>
             ОГРН: 1183443013115<br>
-            Адрес: 400075, Волгоградская область, г. Волгоград, ул. Историческая, д. 140А, офис 1
+            Юридический адрес: 400075, Волгоградская область, г. Волгоград, ул. Историческая, д. 140А, офис 1<br>
+            Адрес офиса: г. Лида
           </p>
         </div>
       </div>
@@ -564,7 +565,7 @@ const contactsBody = `
         <div class="rounded-2xl border border-white/5 overflow-hidden h-[450px] shadow-2xl relative">
           <!-- Embedded Yandex Map with dark mode invert filter -->
           <iframe 
-            src="https://yandex.ru/map-widget/v1/?ll=44.4754%2C48.7490&z=16&mode=search&ol=geo&uri=ymapsbm1%3A%2F%2Fgeo%2Fru%2Fvolgograd%2F53070438" 
+            src="https://yandex.ru/map-widget/v1/?text=%D0%9B%D0%B8%D0%B4%D0%B0&z=13" 
             width="100%" 
             height="100%" 
             frameborder="0" 
