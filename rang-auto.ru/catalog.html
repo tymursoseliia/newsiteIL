@@ -239,69 +239,9 @@
  
   
     <style>
-      .catalog-layout-container {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 24px !important;
-        width: 100% !important;
-      }
-      @media (min-width: 992px) {
-        .catalog-layout-container {
-          display: grid !important;
-          grid-template-columns: 280px 1fr !important;
-          gap: 32px !important;
-          align-items: start !important;
-        }
-      }
-      .form-input {
-        background: #1c1c1c !important;
-        border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
-        border-radius: 12px !important;
-        color: #ffffff !important;
-        padding: 10px 14px !important;
-        font-size: 14px !important;
-        width: 100% !important;
-        transition: all 0.25s ease !important;
-        appearance: none !important;
-        -webkit-appearance: none !important;
-      }
-      .form-input:focus {
-        border-color: var(--accent) !important;
-        box-shadow: 0 0 0 3px rgba(255, 42, 53, 0.15) !important;
-        background: #222 !important;
-        outline: none !important;
-      }
-      .form-label {
-        font-size: 11px !important;
-        font-weight: 700 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.05em !important;
-        color: #8a8a8a !important;
-        margin-bottom: 6px !important;
-        display: block !important;
-      }
       .active-nav-link {
-        color: #ffffff !important;
-        font-weight: 600 !important;
-        border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
-        border-radius: 9999px !important;
-        padding: 6px 18px !important;
-        background: rgba(255, 255, 255, 0.03) !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 2px !important;
-        transition: all 0.2s ease;
-      }
-      .active-nav-link:hover {
-        border-color: #ffffff !important;
-        background: rgba(255, 255, 255, 0.08) !important;
-      }
-      .active-nav-link::after {
-        content: '•';
-        margin-left: 4px;
-        color: #ffffff;
-        font-weight: bold;
-        font-size: 14px;
+        color: var(--accent) !important;
+        font-weight: 700 !important;
       }
       .breadcrumb-container {
         padding: 24px 0 12px 0;
@@ -434,134 +374,8 @@
       <p class="text-base text-gray-400">Выберите подходящий автомобиль с прозрачной историей и быстрой доставкой из Европы</p>
     </div>
     
-    <div class="catalog-layout-container">
-      <!-- Filters Sidebar -->
-      <div class="bg-[#151515] border border-white/5 p-6 rounded-2xl h-fit space-y-5" style="box-shadow: 0 4px 30px rgba(0,0,0,0.45);">
-        <h3 class="text-[19px] font-bold text-white mb-2">Фильтры</h3>
-        
-        <!-- Search input -->
-        <div class="form-group">
-          <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block" for="filter-search">Поиск</label>
-          <div class="relative">
-            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-sm">🔍</span>
-            <input type="text" id="filter-search" class="form-input pl-10" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="Марка, модель, описание..." oninput="filterCars()" />
-          </div>
-        </div>
-        
-        <!-- Sorting -->
-        <div class="form-group">
-          <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block" for="filter-sort">Сортировка</label>
-          <select id="filter-sort" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" onchange="filterCars()">
-            <option value="default">По умолчанию</option>
-            <option value="price-asc">Сначала дешевые</option>
-            <option value="price-desc">Сначала дорогие</option>
-            <option value="year-desc">Сначала новые (год)</option>
-            <option value="mileage-asc">Сначала с меньшим пробегом</option>
-          </select>
-        </div>
-        
-        <!-- Brand select -->
-        <div class="form-group">
-          <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block" for="filter-brand">Марка</label>
-          <select id="filter-brand" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" onchange="onBrandChange()">
-            <option value="">Все марки</option>
-          </select>
-        </div>
-
-        <!-- Model select -->
-        <div class="form-group">
-          <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block" for="filter-model">Модель</label>
-          <select id="filter-model" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" onchange="filterCars()" disabled>
-            <option value="">Сначала выберите марку</option>
-          </select>
-        </div>
-
-        <!-- Price Range -->
-        <div class="form-group">
-          <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block">Цена, ₽</label>
-          <div class="grid grid-cols-2 gap-2">
-            <input type="number" id="filter-price-min" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="от" oninput="filterCars()" />
-            <input type="number" id="filter-price-max" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="до" oninput="filterCars()" />
-          </div>
-        </div>
-
-        <!-- Year Range -->
-        <div class="form-group">
-          <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block">Год выпуска</label>
-          <div class="grid grid-cols-2 gap-2">
-            <input type="number" id="filter-year-min" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="от" oninput="filterCars()" />
-            <input type="number" id="filter-year-max" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="до" oninput="filterCars()" />
-          </div>
-        </div>
-
-        <!-- Collapsible More Filters -->
-        <div class="pt-2 border-t border-white/5">
-          <div class="cursor-pointer flex items-center justify-between text-[13px] text-gray-400 font-semibold select-none hover:text-white transition-colors" onclick="toggleMoreFilters()">
-            <span>Больше фильтров</span>
-            <span id="more-filters-chevron" style="font-size: 10px; transition: transform 0.2s;">▼</span>
-          </div>
-          <div id="more-filters-panel" class="space-y-4 pt-4 hidden">
-            <!-- Transmission select -->
-            <div class="form-group">
-              <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block" for="filter-transmission">Коробка передач</label>
-              <select id="filter-transmission" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" onchange="filterCars()">
-                <option value="">Любая</option>
-                <option value="Автомат">Автомат</option>
-                <option value="Механика">Механика</option>
-                <option value="Робот">Робот</option>
-              </select>
-            </div>
-
-            <!-- Fuel select -->
-            <div class="form-group">
-              <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block" for="filter-fuel">Тип топлива</label>
-              <select id="filter-fuel" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" onchange="filterCars()">
-                <option value="">Любое</option>
-                <option value="Бензин">Бензин</option>
-                <option value="Дизель">Дизель</option>
-                <option value="Гибрид">Гибрид</option>
-                <option value="Электро">Электро</option>
-              </select>
-            </div>
-
-            <!-- Mileage Range -->
-            <div class="form-group">
-              <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block">Пробег, км</label>
-              <div class="grid grid-cols-2 gap-2">
-                <input type="number" id="filter-mileage-min" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="от" oninput="filterCars()" />
-                <input type="number" id="filter-mileage-max" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="до" oninput="filterCars()" />
-              </div>
-            </div>
-
-            <!-- Engine capacity Range -->
-            <div class="form-group">
-              <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block">Объем двигателя, л</label>
-              <div class="grid grid-cols-2 gap-2">
-                <input type="number" step="0.1" id="filter-engine-min" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="от" oninput="filterCars()" />
-                <input type="number" step="0.1" id="filter-engine-max" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="до" oninput="filterCars()" />
-              </div>
-            </div>
-
-            <!-- Horsepower Range -->
-            <div class="form-group">
-              <label class="form-label text-[11px] uppercase tracking-wider text-gray-500 font-bold mb-1.5 block">Мощность, л.с.</label>
-              <div class="grid grid-cols-2 gap-2">
-                <input type="number" id="filter-hp-min" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="от" oninput="filterCars()" />
-                <input type="number" id="filter-hp-max" class="form-input" style="background:#222; border-color: rgba(255,255,255,0.05);" placeholder="до" oninput="filterCars()" />
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <button class="btn btn-secondary w-full text-center" style="justify-content: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);" onclick="resetFilters()">Сбросить</button>
-      </div>
-      
-      <!-- Catalog Grid -->
-      <div style="flex:1;">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="catalog-grid">
-          <p class="text-gray-500 text-center col-span-3 py-12">Загрузка каталога...</p>
-        </div>
-      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="catalog-grid">
+      <p class="text-gray-500 text-center col-span-3 py-12">Загрузка каталога...</p>
     </div>
   </section>
 
@@ -810,240 +624,52 @@
       
       // Page specific logic
       
-  let allCars = [];
-
   const loadCars = async () => {
-    try {
-      const res = await fetch('/api/cars');
-      allCars = await res.json();
-      
-      // Populate brand dropdown dynamically
-      const brands = [...new Set(allCars.map(c => c.make))].sort();
-      const brandSelect = document.getElementById('filter-brand');
-      if (brandSelect) {
-        brandSelect.innerHTML = '<option value="">Все марки</option>' + 
-          brands.map(b => `<option value="${b}">${b}</option>`).join('');
-      }
-
-      renderCars(allCars);
-    } catch (err) {
-      console.error('Ошибка загрузки автомобилей:', err);
-      const grid = document.getElementById('catalog-grid');
-      if (grid) grid.innerHTML = '<p class="text-gray-400 text-center col-span-3">Не удалось загрузить каталог автомобилей.</p>';
-    }
-  };
-
-  const renderCars = (cars) => {
     const grid = document.getElementById('catalog-grid');
     if (!grid) return;
-
-    if (cars.length === 0) {
-      grid.innerHTML = '<p class="text-gray-500 text-center col-span-3 py-12">Нет автомобилей, соответствующих выбранным фильтрам.</p>';
-      return;
-    }
-
-    grid.innerHTML = cars.map(car => `
-      <div class="h-full animate-fade-in">
-        <a class="group flex flex-col h-full card-dark rounded-2xl overflow-hidden" href="#car-${car.id}">
-          <div class="relative overflow-hidden" style="aspect-ratio:16/10;background:var(--gallery-empty-bg)">
-            <img alt="${car.make} ${car.model}" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" src="${car.image}" />
-            <span class="fuel-tag" data-fuel="${car.fuel}">${car.fuel}</span>
-          </div>
-          <div class="flex flex-col flex-1 p-5">
-            <h3 class="text-[17px] font-semibold leading-snug truncate" style="color:var(--text-heading)">
-              ${car.make} ${car.model}
-            </h3>
-            <p class="text-[13px] font-medium mt-1" style="color:var(--text-muted)">
-              ${car.year} г. · ${car.bodyType}
-            </p>
-            <div class="flex flex-wrap gap-2 mt-3.5">
-              <span class="spec-chip">${car.mileage}</span>
-              <span class="spec-chip">${car.engine}</span>
-              <span class="spec-chip">${car.hp}</span>
-              <span class="spec-chip">${car.transmission}</span>
+    try {
+      const res = await fetch('/api/cars');
+      const cars = await res.json();
+      grid.innerHTML = cars.map(car => `
+        <div class="h-full">
+          <a class="group flex flex-col h-full card-dark rounded-2xl overflow-hidden" href="#car-${car.id}">
+            <div class="relative overflow-hidden" style="aspect-ratio:16/10;background:var(--gallery-empty-bg)">
+              <img alt="${car.make} ${car.model}" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" src="${car.image}" />
+              <span class="fuel-tag" data-fuel="${car.fuel}">${car.fuel}</span>
             </div>
-            <div class="flex items-center justify-between mt-auto pt-4">
-              <span class="text-[18px] font-bold leading-none" style="color:var(--text-heading)">
-                ${car.price}
-              </span>
-              <span class="featured-cta">
-                Смотреть
-                <svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="14">
-                  <path d="M9 5l7 7-7 7"></path>
-                </svg>
-              </span>
+            <div class="flex flex-col flex-1 p-5">
+              <h3 class="text-[17px] font-semibold leading-snug truncate" style="color:var(--text-heading)">
+                ${car.make} ${car.model}
+              </h3>
+              <p class="text-[13px] font-medium mt-1" style="color:var(--text-muted)">
+                ${car.year} г. · ${car.bodyType}
+              </p>
+              <div class="flex flex-wrap gap-2 mt-3.5">
+                <span class="spec-chip">${car.mileage}</span>
+                <span class="spec-chip">${car.engine}</span>
+                <span class="spec-chip">${car.hp}</span>
+                <span class="spec-chip">${car.transmission}</span>
+              </div>
+              <div class="flex items-center justify-between mt-auto pt-4">
+                <span class="text-[18px] font-bold leading-none" style="color:var(--text-heading)">
+                  ${car.price}
+                </span>
+                <span class="featured-cta">
+                  Смотреть
+                  <svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="14">
+                    <path d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </span>
+              </div>
             </div>
-          </div>
-        </a>
-      </div>
-    `).join('');
-  };
-
-  const onBrandChange = () => {
-    const brandVal = document.getElementById('filter-brand').value;
-    const modelSelect = document.getElementById('filter-model');
-    
-    if (!brandVal) {
-      modelSelect.innerHTML = '<option value="">Сначала выберите марку</option>';
-      modelSelect.disabled = true;
-    } else {
-      const models = [...new Set(allCars.filter(c => c.make === brandVal).map(c => c.model))].sort();
-      modelSelect.innerHTML = '<option value="">Все модели</option>' + 
-        models.map(m => `<option value="${m}">${m}</option>`).join('');
-      modelSelect.disabled = false;
-    }
-    filterCars();
-  };
-
-  const toggleMoreFilters = () => {
-    const panel = document.getElementById('more-filters-panel');
-    const chevron = document.getElementById('more-filters-chevron');
-    if (panel.classList.contains('hidden')) {
-      panel.classList.remove('hidden');
-      chevron.style.transform = 'rotate(180deg)';
-    } else {
-      panel.classList.add('hidden');
-      chevron.style.transform = 'rotate(0deg)';
+          </a>
+        </div>
+      `).join('');
+    } catch (err) {
+      console.error('Ошибка загрузки автомобилей:', err);
+      grid.innerHTML = '<p class="text-gray-400 text-center col-span-3">Не удалось загрузить каталог автомобилей.</p>';
     }
   };
-
-  const filterCars = () => {
-    const searchVal = document.getElementById('filter-search').value.toLowerCase().trim();
-    const brandVal = document.getElementById('filter-brand').value;
-    const modelVal = document.getElementById('filter-model').value;
-    const transVal = document.getElementById('filter-transmission').value;
-    const fuelVal = document.getElementById('filter-fuel').value;
-    
-    const priceMinVal = document.getElementById('filter-price-min').value;
-    const priceMaxVal = document.getElementById('filter-price-max').value;
-    
-    const yearMinVal = document.getElementById('filter-year-min').value;
-    const yearMaxVal = document.getElementById('filter-year-max').value;
-
-    const mileageMinVal = document.getElementById('filter-mileage-min').value;
-    const mileageMaxVal = document.getElementById('filter-mileage-max').value;
-
-    const engineMinVal = document.getElementById('filter-engine-min').value;
-    const engineMaxVal = document.getElementById('filter-engine-max').value;
-
-    const hpMinVal = document.getElementById('filter-hp-min').value;
-    const hpMaxVal = document.getElementById('filter-hp-max').value;
-    
-    const sortVal = document.getElementById('filter-sort').value;
-
-    let filtered = allCars.filter(car => {
-      // 1. Search text check (make, model, body type)
-      if (searchVal) {
-        const title = (car.make + ' ' + car.model + ' ' + (car.bodyType || '')).toLowerCase();
-        if (!title.includes(searchVal)) return false;
-      }
-      
-      // 2. Brand check
-      if (brandVal && car.make !== brandVal) return false;
-      
-      // 3. Model check
-      if (modelVal && car.model !== modelVal) return false;
-      
-      // 4. Transmission check
-      if (transVal && car.transmission !== transVal) return false;
-      
-      // 5. Fuel type check
-      if (fuelVal && car.fuel !== fuelVal) return false;
-      
-      // 6. Price range check
-      const priceNum = parseInt(car.price.replace(/[^0-9]/g, ''), 10);
-      if (!isNaN(priceNum)) {
-        if (priceMinVal && priceNum < parseInt(priceMinVal, 10)) return false;
-        if (priceMaxVal && priceNum > parseInt(priceMaxVal, 10)) return false;
-      }
-      
-      // 7. Year range check
-      const yearNum = parseInt(car.year, 10);
-      if (!isNaN(yearNum)) {
-        if (yearMinVal && yearNum < parseInt(yearMinVal, 10)) return false;
-        if (yearMaxVal && yearNum > parseInt(yearMaxVal, 10)) return false;
-      }
-
-      // 8. Mileage range check
-      const milNum = parseInt(car.mileage.replace(/[^0-9]/g, ''), 10);
-      if (!isNaN(milNum)) {
-        if (mileageMinVal && milNum < parseInt(mileageMinVal, 10)) return false;
-        if (mileageMaxVal && milNum > parseInt(mileageMaxVal, 10)) return false;
-      }
-
-      // 9. Engine size range check
-      const engNum = parseFloat(car.engine.replace(/[^0-9.]/g, ''));
-      if (!isNaN(engNum)) {
-        if (engineMinVal && engNum < parseFloat(engineMinVal)) return false;
-        if (engineMaxVal && engNum > parseFloat(engineMaxVal)) return false;
-      }
-
-      // 10. HP range check
-      const hpNum = parseInt(car.hp.replace(/[^0-9]/g, ''), 10);
-      if (!isNaN(hpNum)) {
-        if (hpMinVal && hpNum < parseInt(hpMinVal, 10)) return false;
-        if (hpMaxVal && hpNum > parseInt(hpMaxVal, 10)) return false;
-      }
-
-      return true;
-    });
-
-    // Apply Sorting
-    if (sortVal === 'price-asc') {
-      filtered.sort((a, b) => {
-        const priceA = parseInt(a.price.replace(/[^0-9]/g, ''), 10) || 0;
-        const priceB = parseInt(b.price.replace(/[^0-9]/g, ''), 10) || 0;
-        return priceA - priceB;
-      });
-    } else if (sortVal === 'price-desc') {
-      filtered.sort((a, b) => {
-        const priceA = parseInt(a.price.replace(/[^0-9]/g, ''), 10) || 0;
-        const priceB = parseInt(b.price.replace(/[^0-9]/g, ''), 10) || 0;
-        return priceB - priceA;
-      });
-    } else if (sortVal === 'year-desc') {
-      filtered.sort((a, b) => (parseInt(b.year, 10) || 0) - (parseInt(a.year, 10) || 0));
-    } else if (sortVal === 'mileage-asc') {
-      filtered.sort((a, b) => {
-        const milA = parseInt(a.mileage.replace(/[^0-9]/g, ''), 10) || 0;
-        const milB = parseInt(b.mileage.replace(/[^0-9]/g, ''), 10) || 0;
-        return milA - milB;
-      });
-    }
-
-    renderCars(filtered);
-  };
-
-  const resetFilters = () => {
-    document.getElementById('filter-search').value = '';
-    document.getElementById('filter-sort').value = 'default';
-    document.getElementById('filter-brand').value = '';
-    
-    const modelSelect = document.getElementById('filter-model');
-    modelSelect.innerHTML = '<option value="">Сначала выберите марку</option>';
-    modelSelect.disabled = true;
-    
-    document.getElementById('filter-transmission').value = '';
-    document.getElementById('filter-fuel').value = '';
-    document.getElementById('filter-price-min').value = '';
-    document.getElementById('filter-price-max').value = '';
-    document.getElementById('filter-year-min').value = '';
-    document.getElementById('filter-year-max').value = '';
-
-    document.getElementById('filter-mileage-min').value = '';
-    document.getElementById('filter-mileage-max').value = '';
-    document.getElementById('filter-engine-min').value = '';
-    document.getElementById('filter-engine-max').value = '';
-    document.getElementById('filter-hp-min').value = '';
-    document.getElementById('filter-hp-max').value = '';
-    
-    renderCars(allCars);
-  };
-
-  window.onBrandChange = onBrandChange;
-  window.toggleMoreFilters = toggleMoreFilters;
-  window.filterCars = filterCars;
-  window.resetFilters = resetFilters;
   loadCars();
 
     });

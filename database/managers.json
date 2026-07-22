@@ -14,8 +14,8 @@
     "role": "Руководитель отдела продаж",
     "department": "management",
     "image": "/uploads/manager-filipova.png",
-    "telegram": "https://t.me/rang_auto",
-    "whatsapp": "https://wa.me/79016209645"
+    "telegram": "https://t.me/Prigon_avto_podkluch",
+    "whatsapp": "https://max.ru/join/0xYe_-VUAQN7SIFZ7wsfCWcbldruy8apv9IXDzYop0Y"
   },
   {
     "id": "3",
@@ -23,8 +23,8 @@
     "role": "Руководитель отдела логистики",
     "department": "management",
     "image": "/uploads/manager-golovizin.png",
-    "telegram": "https://t.me/rang_auto",
-    "whatsapp": "https://wa.me/79016209645"
+    "telegram": "https://t.me/Prigon_studio",
+    "whatsapp": "https://max.ru/join/YUqrma6IOZKy-Ob1nrZoq8Zhpncj7bFXpXT7fds-Uo0"
   },
   {
     "id": "4",
@@ -32,8 +32,8 @@
     "role": "Старший менеджер по подбору",
     "department": "sales",
     "image": "/uploads/manager-ustinov.png",
-    "telegram": "https://t.me/rang_auto",
-    "whatsapp": "https://wa.me/79016209645"
+    "telegram": "https://t.me/AutoEUTeam11",
+    "whatsapp": "https://max.ru/join/P6Ff04ijoSDJIZ9j_PzYNaT7Aax3QGW7kskkPtJTwAs"
   },
   {
     "id": "5",
@@ -41,8 +41,8 @@
     "role": "Менеджер по работе с клиентами",
     "department": "sales",
     "image": "/uploads/manager-popova.png",
-    "telegram": "https://t.me/rang_auto",
-    "whatsapp": "https://wa.me/79016209645"
+    "telegram": "https://t.me/AutoEUTeam11",
+    "whatsapp": "https://max.ru/join/P6Ff04ijoSDJIZ9j_PzYNaT7Aax3QGW7kskkPtJTwAs"
   },
   {
     "id": "6",
@@ -59,8 +59,8 @@
     "role": "Специалист отдела логистики и ВЭД",
     "department": "logistics",
     "image": "/uploads/manager-venidiktova.jpg",
-    "telegram": "https://t.me/rang_auto",
-    "whatsapp": "https://wa.me/79016209645"
+    "telegram": "https://t.me/autoEU_RF",
+    "whatsapp": "https://max.ru/join/Pop_blxvkQP_XawgzgERu8X7I0x3oPgjDzj5mCLdG6M"
   },
   {
     "id": "8",
@@ -68,8 +68,8 @@
     "role": "Эксперт по оценке автомобилей",
     "department": "logistics",
     "image": "/uploads/manager-klochikhin.png",
-    "telegram": "https://t.me/rang_auto",
-    "whatsapp": "https://wa.me/79016209645"
+    "telegram": "https://t.me/autoEU_RF",
+    "whatsapp": "https://max.ru/join/Pop_blxvkQP_XawgzgERu8X7I0x3oPgjDzj5mCLdG6M"
   },
   {
     "id": "9",
@@ -77,8 +77,8 @@
     "role": "Специалист по выездному осмотру и подбору",
     "department": "logistics",
     "image": "/uploads/manager-ivankin.png",
-    "telegram": "https://t.me/rang_auto",
-    "whatsapp": "https://wa.me/79016209645"
+    "telegram": "https://t.me/Auto_Grand_Official24_DE",
+    "whatsapp": "https://max.ru/join/hW-ned8s-21gZzToELBaShE9ujMDoEXtfrdLNQDAKu0"
   },
   {
     "id": "10",
@@ -86,15 +86,24 @@
     "role": "Специалист по доставке и таможенному оформлению",
     "department": "logistics",
     "image": "/uploads/manager-eremeev.png",
-    "telegram": "https://t.me/rang_auto",
-    "whatsapp": "https://wa.me/79016209645"
+    "telegram": "https://t.me/Autos_Imports",
+    "whatsapp": "https://max.ru/join/DMsrhh19mx4oIYP0DaAJk6F4TmK8f5i86_6-CEC-beA"
   },
   {
     "id": "11",
     "name": "Надеждин Роман Анатольевич",
-    "role": "",
+    "role": "Специалист по логистике",
     "department": "logistics",
     "image": "/uploads/manager-nadezhdin.png",
+    "telegram": "https://t.me/Auto_Grand_Official24_DE",
+    "whatsapp": "https://max.ru/join/hW-ned8s-21gZzToELBaShE9ujMDoEXtfrdLNQDAKu0"
+  },
+  {
+    "id": "12",
+    "name": "Повханич Иван Иванович",
+    "role": "Менеджер по подбору автомобилей",
+    "department": "sales",
+    "image": "/uploads/manager-povhanich.png",
     "telegram": "https://t.me/rang_auto",
     "whatsapp": "https://wa.me/79016209645"
   }
