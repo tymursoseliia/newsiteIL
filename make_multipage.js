@@ -157,9 +157,57 @@ function generatePage(title, activeNav, breadcrumb, bodyContent, scriptContent) 
 // -------------------------------------------------------------
 const catalogBody = `
   <section class="py-10">
-    <div class="mb-12 text-center md:text-left">
+    <div class="mb-8 text-center md:text-left">
       <h1 class="text-4xl font-bold tracking-tight text-white mb-3">Каталог проверенных автомобилей</h1>
       <p class="text-base text-gray-400">Выберите подходящий автомобиль с прозрачной историей и быстрой доставкой из Европы</p>
+    </div>
+
+    <!-- Interactive Filters Container -->
+    <div class="mb-8 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-2xl">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 1. Search Input -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Поиск по маркам / моделям</label>
+          <div class="relative">
+            <input type="text" id="filter-search" placeholder="Например: BMW, Kia..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-all pl-10" />
+            <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+        </div>
+
+        <!-- 2. Fuel Type Filter -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Тип топлива</label>
+          <select id="filter-fuel" class="w-full bg-gray-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-red-500 transition-all">
+            <option value="">Все типы топлива</option>
+            <option value="бензин">Бензин</option>
+            <option value="дизель">Дизель</option>
+            <option value="гибрид">Гибрид</option>
+            <option value="электро">Электро</option>
+          </select>
+        </div>
+
+        <!-- 3. Transmission Filter -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Коробка передач</label>
+          <select id="filter-transmission" class="w-full bg-gray-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-red-500 transition-all">
+            <option value="">Все КПП</option>
+            <option value="автомат">Автоматическая / Робот</option>
+            <option value="механика">Механическая</option>
+          </select>
+        </div>
+
+        <!-- 4. Max Price Filter -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Макс. цена (₽)</label>
+          <input type="number" id="filter-price-max" placeholder="До..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-all" />
+        </div>
+      </div>
+
+      <!-- Bottom Status Bar -->
+      <div class="flex items-center justify-between mt-4 pt-4 border-t border-white/5 text-sm">
+        <span class="text-gray-400">Найдено автомобилей: <strong class="text-white font-semibold" id="filter-count">0</strong></span>
+        <button id="filter-reset-btn" class="text-xs text-red-400 hover:text-red-300 underline transition-all hidden">Сбросить фильтры</button>
+      </div>
     </div>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="catalog-grid">
@@ -169,47 +217,136 @@ const catalogBody = `
 `;
 
 const catalogScript = `
+  let allCars = [];
+
+  const filterSearch = document.getElementById('filter-search');
+  const filterFuel = document.getElementById('filter-fuel');
+  const filterTransmission = document.getElementById('filter-transmission');
+  const filterPriceMax = document.getElementById('filter-price-max');
+  const filterResetBtn = document.getElementById('filter-reset-btn');
+  const filterCount = document.getElementById('filter-count');
+  const grid = document.getElementById('catalog-grid');
+
+  const renderCars = (carsToRender) => {
+    if (!grid) return;
+    if (filterCount) filterCount.textContent = carsToRender.length;
+
+    const isFiltered = (filterSearch && filterSearch.value.trim() !== '') || (filterFuel && filterFuel.value !== '') || (filterTransmission && filterTransmission.value !== '') || (filterPriceMax && filterPriceMax.value.trim() !== '');
+    if (filterResetBtn) {
+      if (isFiltered) {
+        filterResetBtn.classList.remove('hidden');
+      } else {
+        filterResetBtn.classList.add('hidden');
+      }
+    }
+
+    if (carsToRender.length === 0) {
+      grid.innerHTML = \`
+        <div class="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-16 px-4 card-dark rounded-2xl border border-white/5">
+          <svg class="w-12 h-12 text-gray-500 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <p class="text-lg font-medium text-white mb-1">По вашему запросу ничего не найдено</p>
+          <p class="text-sm text-gray-400 mb-4">Попробуйте изменить параметры поиска или сбросить фильтры</p>
+          <button id="inline-reset-btn" class="px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-medium rounded-xl text-xs uppercase tracking-wider transition-all">Сбросить фильтры</button>
+        </div>
+      \`;
+      const inlineReset = document.getElementById('inline-reset-btn');
+      if (inlineReset) inlineReset.addEventListener('click', resetFilters);
+      return;
+    }
+
+    grid.innerHTML = carsToRender.map(car => \`
+      <div class="h-full">
+        <a class="group flex flex-col h-full card-dark rounded-2xl overflow-hidden" href="#car-\${car.id}">
+          <div class="relative overflow-hidden" style="aspect-ratio:16/10;background:var(--gallery-empty-bg)">
+            <img alt="\${car.make} \${car.model}" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" src="\${car.image}" />
+            <span class="fuel-tag" data-fuel="\${car.fuel}">\${car.fuel}</span>
+          </div>
+          <div class="flex flex-col flex-1 p-5">
+            <h3 class="text-[17px] font-semibold leading-snug truncate" style="color:var(--text-heading)">
+              \${car.make} \${car.model}
+            </h3>
+            <p class="text-[13px] font-medium mt-1" style="color:var(--text-muted)">
+              \${car.year} г. · \${car.bodyType}
+            </p>
+            <div class="flex flex-wrap gap-2 mt-3.5">
+              <span class="spec-chip">\${car.mileage}</span>
+              <span class="spec-chip">\${car.engine}</span>
+              <span class="spec-chip">\${car.hp}</span>
+              <span class="spec-chip">\${car.transmission}</span>
+            </div>
+            <div class="flex items-center justify-between mt-auto pt-4">
+              <span class="text-[18px] font-bold leading-none" style="color:var(--text-heading)">
+                \${car.price}
+              </span>
+              <span class="featured-cta">
+                Смотреть
+                <svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="14">
+                  <path d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    \`).join('');
+  };
+
+  const applyFilters = () => {
+    const searchVal = filterSearch ? filterSearch.value.trim().toLowerCase() : '';
+    const fuelVal = filterFuel ? filterFuel.value.trim().toLowerCase() : '';
+    const transVal = filterTransmission ? filterTransmission.value.trim().toLowerCase() : '';
+    const maxPriceVal = filterPriceMax ? parseFloat(filterPriceMax.value) : NaN;
+
+    const filtered = allCars.filter(car => {
+      if (searchVal) {
+        const fullTitle = \`\${car.make} \${car.model}\`.toLowerCase();
+        if (!fullTitle.includes(searchVal)) return false;
+      }
+      if (fuelVal) {
+        const carFuel = (car.fuel || '').toLowerCase();
+        if (!carFuel.includes(fuelVal)) return false;
+      }
+      if (transVal) {
+        const carTrans = (car.transmission || '').toLowerCase();
+        if (transVal === 'автомат') {
+          if (!carTrans.includes('автомат') && !carTrans.includes('робот')) return false;
+        } else if (transVal === 'механика') {
+          if (!carTrans.includes('механич')) return false;
+        } else if (!carTrans.includes(transVal)) {
+          return false;
+        }
+      }
+      if (!isNaN(maxPriceVal) && maxPriceVal > 0) {
+        const rawPriceStr = (car.price || '').toString().replace(/\\D/g, '');
+        const numPrice = parseFloat(rawPriceStr);
+        if (!isNaN(numPrice) && numPrice > maxPriceVal) return false;
+      }
+      return true;
+    });
+
+    renderCars(filtered);
+  };
+
+  const resetFilters = () => {
+    if (filterSearch) filterSearch.value = '';
+    if (filterFuel) filterFuel.value = '';
+    if (filterTransmission) filterTransmission.value = '';
+    if (filterPriceMax) filterPriceMax.value = '';
+    applyFilters();
+  };
+
+  if (filterSearch) filterSearch.addEventListener('input', applyFilters);
+  if (filterFuel) filterFuel.addEventListener('change', applyFilters);
+  if (filterTransmission) filterTransmission.addEventListener('change', applyFilters);
+  if (filterPriceMax) filterPriceMax.addEventListener('input', applyFilters);
+  if (filterResetBtn) filterResetBtn.addEventListener('click', resetFilters);
+
   const loadCars = async () => {
-    const grid = document.getElementById('catalog-grid');
     if (!grid) return;
     try {
       const res = await fetch('/api/cars');
-      const cars = await res.json();
-      grid.innerHTML = cars.map(car => \`
-        <div class="h-full">
-          <a class="group flex flex-col h-full card-dark rounded-2xl overflow-hidden" href="#car-\${car.id}">
-            <div class="relative overflow-hidden" style="aspect-ratio:16/10;background:var(--gallery-empty-bg)">
-              <img alt="\${car.make} \${car.model}" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" src="\${car.image}" />
-              <span class="fuel-tag" data-fuel="\${car.fuel}">\${car.fuel}</span>
-            </div>
-            <div class="flex flex-col flex-1 p-5">
-              <h3 class="text-[17px] font-semibold leading-snug truncate" style="color:var(--text-heading)">
-                \${car.make} \${car.model}
-              </h3>
-              <p class="text-[13px] font-medium mt-1" style="color:var(--text-muted)">
-                \${car.year} г. · \${car.bodyType}
-              </p>
-              <div class="flex flex-wrap gap-2 mt-3.5">
-                <span class="spec-chip">\${car.mileage}</span>
-                <span class="spec-chip">\${car.engine}</span>
-                <span class="spec-chip">\${car.hp}</span>
-                <span class="spec-chip">\${car.transmission}</span>
-              </div>
-              <div class="flex items-center justify-between mt-auto pt-4">
-                <span class="text-[18px] font-bold leading-none" style="color:var(--text-heading)">
-                  \${car.price}
-                </span>
-                <span class="featured-cta">
-                  Смотреть
-                  <svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="14">
-                    <path d="M9 5l7 7-7 7"></path>
-                  </svg>
-                </span>
-              </div>
-            </div>
-          </a>
-        </div>
-      \`).join('');
+      allCars = await res.json();
+      applyFilters();
     } catch (err) {
       console.error('Ошибка загрузки автомобилей:', err);
       grid.innerHTML = '<p class="text-gray-400 text-center col-span-3">Не удалось загрузить каталог автомобилей.</p>';
