@@ -20,6 +20,17 @@
     "created_at": "2025-01-15T12:00:00+00:00"
   },
   {
+    "id": "3",
+    "name": "Дмитрий В.",
+    "carModel": "Toyota Proace City",
+    "type": "video",
+    "text": "Видео-отзыв о покупке семейного минивэна через Ранг Авто. Все этапы от подбора до выдачи в Казани.",
+    "mediaUrl": "https://images.unsplash.com/photo-1518364538800-6bcb3f25da49?auto=format&fit=crop&w=800&q=80",
+    "videoUrl": "https://www.youtube.com/embed/g2e6_F13PzM",
+    "date": "02.02.2025",
+    "created_at": "2025-02-02T10:30:00+00:00"
+  },
+  {
     "id": "4",
     "name": "Сергей П.",
     "carModel": "Ford Puma",
