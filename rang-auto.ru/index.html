@@ -716,7 +716,7 @@
            </span>
           </div>
          </a>
-         <a href="/about" style="text-decoration:none;display:block;background:var(--card-bg);border:none;border-radius:16px;padding:32px 28px 24px;cursor:pointer;text-align:left;position:relative;overflow:hidden;width:100%;box-shadow:0 0 0 1.5px var(--about-border), 0 0 18px var(--about-accent-soft), 0 4px 20px rgba(0,0,0,0.20);transition:box-shadow 0.15s ease;opacity:1;transform:none" tabindex="0">
+         <a href="/about" onclick="event.preventDefault(); const target = document.getElementById('team-section'); if (target) { const headerOffset = 80; const elementPosition = target.getBoundingClientRect().top; const offsetPosition = elementPosition + window.pageYOffset - headerOffset; window.scrollTo({ top: offsetPosition, behavior: 'smooth' }); }" style="text-decoration:none;display:block;background:var(--card-bg);border:none;border-radius:16px;padding:32px 28px 24px;cursor:pointer;text-align:left;position:relative;overflow:hidden;width:100%;box-shadow:0 0 0 1.5px var(--about-border), 0 0 18px var(--about-accent-soft), 0 4px 20px rgba(0,0,0,0.20);transition:box-shadow 0.15s ease;opacity:1;transform:none" tabindex="0">
           <span aria-hidden="true" style="position:absolute;top:14px;right:14px;width:20px;height:20px;border-top:3px solid var(--about-accent);border-right:3px solid var(--about-accent);border-radius:0 3px 0 0">
           </span>
           <div style="margin-bottom:20px">
