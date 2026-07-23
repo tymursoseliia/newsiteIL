@@ -346,6 +346,14 @@ const catalogScript = `
     try {
       const res = await fetch('/api/cars');
       allCars = await res.json();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const makeParam = urlParams.get('make') || urlParams.get('search') || '';
+      const priceParam = urlParams.get('priceMax') || urlParams.get('price') || '';
+
+      if (makeParam && filterSearch) filterSearch.value = makeParam;
+      if (priceParam && filterPriceMax) filterPriceMax.value = priceParam;
+
       applyFilters();
     } catch (err) {
       console.error('Ошибка загрузки автомобилей:', err);
