@@ -97,6 +97,51 @@ function generatePage(title, activeNav, breadcrumb, bodyContent, scriptContent) 
   <footer class="mt-auto" style="border-top:1px solid var(--footer-border);background:var(--footer-bg)">
     ${footerHtml}
   </footer>
+
+  <!-- Privacy Policy Modal -->
+  <div id="privacy-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+    <div class="relative w-full max-w-2xl bg-[#0f1326] border border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 overflow-hidden flex flex-col max-h-[85vh]">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+          <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          Политика конфиденциальности
+        </h3>
+        <button id="privacy-modal-close" class="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      <div class="overflow-y-auto pr-2 text-sm text-gray-300 leading-relaxed space-y-4 font-sans custom-scrollbar">
+        <p>Настоящая Политика конфиденциальности персональных данных (далее – Политика) действует в отношении всей информации, которую ООО «Ранг» может получить о пользователе во время использования сайта rang-auto.ru.</p>
+        
+        <h4 class="font-semibold text-white text-base mt-2">1. Общие положения</h4>
+        <p>1.1. Использование сайта означает безоговорочное согласие пользователя с настоящей Политикой и указанными в ней условиями обработки его персональной информации.</p>
+        <p>1.2. В случае несогласия с этими условиями пользователь должен воздержаться от использования сайта.</p>
+        
+        <h4 class="font-semibold text-white text-base mt-2">2. Состав персональных данных</h4>
+        <p>2.1. Оператор обрабатывает следующие персональные данные: ФИО, контактный номер телефона, адрес электронной почты, параметры интересующего автомобиля.</p>
+        
+        <h4 class="font-semibold text-white text-base mt-2">3. Цели обработки информации</h4>
+        <p>3.1. Идентификация пользователя для оформления заявки на подбор, покупку или доставку автомобиля.</p>
+        <p>3.2. Предоставление пользователю эффективной клиентской и технической поддержки.</p>
+        <p>3.3. Связь с пользователем, включая направление уведомлений и запросов.</p>
+
+        <h4 class="font-semibold text-white text-base mt-2">4. Защита и передача данных</h4>
+        <p>4.1. Оператор принимает необходимые и достаточные организационные и технические меры для защиты персональной информации пользователя от неправомерного или случайного доступа.</p>
+        <p>4.2. Конфиденциальность персональных данных сохраняется в строгом соответствии с законодательством.</p>
+
+        <h4 class="font-semibold text-white text-base mt-2">5. Реквизиты оператора</h4>
+        <p>ООО «Ранг»<br>
+        ИНН: 1655431994 / ОГРН: 1201600005771<br>
+        Адрес офиса: г. Лида<br>
+        Email: <a href="mailto:ooorangkazan@gmail.com" class="text-red-400 underline">ooorangkazan@gmail.com</a><br>
+        Телефон: <a href="tel:+7 (495) 178-00-76" class="text-red-400 underline">+7 (495) 178-00-76</a></p>
+      </div>
+      <div class="pt-4 border-t border-white/10 mt-4 flex justify-end">
+        <button id="privacy-modal-btn-close" class="px-6 py-2.5 bg-red-600 hover:bg-red-500 text-white font-semibold text-sm rounded-xl transition-all">Понятно</button>
+      </div>
+    </div>
+  </div>
+
   
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -134,6 +179,38 @@ function generatePage(title, activeNav, breadcrumb, bodyContent, scriptContent) 
           });
         });
       }
+
+      
+  // Privacy Modal Handlers
+  const privacyModal = document.getElementById('privacy-modal');
+  const privacyClose1 = document.getElementById('privacy-modal-close');
+  const privacyClose2 = document.getElementById('privacy-modal-btn-close');
+
+  const openPrivacyModal = (e) => {
+    if (e) e.preventDefault();
+    if (privacyModal) {
+      privacyModal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+  };
+
+  const closePrivacyModal = () => {
+    if (privacyModal) {
+      privacyModal.classList.add('opacity-0', 'pointer-events-none');
+    }
+  };
+
+  document.querySelectorAll('a[href*="privacy"]').forEach(link => {
+    link.addEventListener('click', openPrivacyModal);
+  });
+
+  if (privacyClose1) privacyClose1.addEventListener('click', closePrivacyModal);
+  if (privacyClose2) privacyClose2.addEventListener('click', closePrivacyModal);
+
+  if (privacyModal) {
+    privacyModal.addEventListener('click', (e) => {
+      if (e.target === privacyModal) closePrivacyModal();
+    });
+  }
 
       // Fade-in effect
       const wrapper = document.getElementById('main-content-wrapper');
@@ -278,12 +355,7 @@ const catalogScript = `
               <span class="text-[18px] font-bold leading-none" style="color:var(--text-heading)">
                 \${car.price}
               </span>
-              <span class="featured-cta">
-                Смотреть
-                <svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="14">
-                  <path d="M9 5l7 7-7 7"></path>
-                </svg>
-              </span>
+              
             </div>
           </div>
         </a>
@@ -738,3 +810,27 @@ updatedIndex = cleanNavigation(updatedIndex);
 fs.writeFileSync(indexFile, updatedIndex, 'utf8');
 
 console.log('Successfully completed multi-page migration!');
+
+
+// -------------------------------------------------------------
+// 5. PRIVACY PAGE
+// -------------------------------------------------------------
+const privacyBody = `
+  <section class="py-12 max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-white mb-6">Политика конфиденциальности</h1>
+    <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-6 sm:p-8 text-gray-300 space-y-4 leading-relaxed">
+      <p>Настоящая Политика конфиденциальности персональных данных действует в отношении всей информации, которую ООО «Ранг» может получить о пользователе во время использования сайта rang-auto.ru.</p>
+      <h3 class="text-lg font-bold text-white mt-4">1. Общие положения</h3>
+      <p>Использование сайта означает безоговорочное согласие пользователя с настоящей Политикой и указанными в ней условиями обработки его персональной информации.</p>
+      <h3 class="text-lg font-bold text-white mt-4">2. Цели обработки информации</h3>
+      <p>Персональные данные используются для связи с пользователем, подбора автомобилей и обработки заявок.</p>
+      <h3 class="text-lg font-bold text-white mt-4">3. Реквизиты оператора</h3>
+      <p>ООО «Ранг»<br>ИНН: 1655431994 / ОГРН: 1201600005771<br>Адрес офиса: г. Лида<br>Email: ooorangkazan@gmail.com</p>
+    </div>
+  </section>
+`;
+
+fs.writeFileSync(
+  path.join(__dirname, 'rang-auto.ru', 'privacy.html'),
+  generatePage('Политика конфиденциальности — Автоспутник', 'privacy', 'Политика конфиденциальности', privacyBody, '')
+);

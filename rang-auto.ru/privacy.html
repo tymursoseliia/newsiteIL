@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="dm_sans_ae92e279-module___wC0Mq__variable dark" lang="ru">
 <head>
-  <title>О компании — Автоспутник</title>
+  <title>Политика конфиденциальности — Автоспутник</title>
   
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -303,7 +303,7 @@
         Отзывы
        </span>
       </a>
-      <a class="nav-link" href="/about" class="nav-link active-nav-link"
+      <a class="nav-link" href="/about">
        <span class="relative z-10 flex items-center gap-1.5">
         <span class="nav-icon">
          <svg fill="none" height="15" overflow="visible" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewbox="0 0 24 24" width="15">
@@ -363,39 +363,21 @@
         <div class="breadcrumb-container">
           <a href="/">Главная</a>
           <span class="breadcrumb-separator">/</span>
-          <span>О компании</span>
+          <span>Политика конфиденциальности</span>
         </div>
         
         <!-- Content -->
         
-  <section class="py-10">
-    <div class="mb-12 text-center md:text-left">
-      <h1 class="text-4xl font-bold tracking-tight text-white mb-3">О компании «Автоспутник»</h1>
-      <p class="text-base text-gray-400">Ваш надежный партнер по подбору и доставке качественных автомобилей из Европы.</p>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16 items-center">
-      <div class="text-gray-300 space-y-5 leading-relaxed">
-        <p>Мы специализируемся на профессиональном поиске, проверке технического состояния и безопасной логистике легковых автомобилей из Германии, Швеции и других стран Евросоюза.</p>
-        <p><strong>ООО «Автоспутник»</strong> — это команда экспертов, гарантирующая юридическую чистоту сделки, точную оценку состояния кузова и двигателя, а также полное таможенное оформление «под ключ».</p>
-        <p>Наш офис находится в г. Лида, но мы доставляем автомобили клиентам по всей территории Российской Федерации.</p>
-      </div>
-      <div class="rounded-2xl border border-white/5 overflow-hidden aspect-[4/3] bg-white/5 relative">
-        <div class="absolute inset-0 bg-gradient-to-tr from-black/80 to-transparent z-10"></div>
-        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80" alt="About us image" class="w-full h-full object-cover">
-      </div>
-    </div>
-    
-    <!-- Team Section -->
-    <div class="border-t border-white/5 pt-12">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold tracking-tight text-white mb-2">Наша команда</h2>
-        <p class="text-sm text-gray-400">Профессионалы, готовые помочь вам на каждом этапе покупки автомобиля</p>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-10 justify-items-center mb-10" id="team-grid">
-        <p class="text-gray-500 text-center col-span-5 py-8">Загрузка списка команды...</p>
-      </div>
+  <section class="py-12 max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-white mb-6">Политика конфиденциальности</h1>
+    <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-6 sm:p-8 text-gray-300 space-y-4 leading-relaxed">
+      <p>Настоящая Политика конфиденциальности персональных данных действует в отношении всей информации, которую ООО «Ранг» может получить о пользователе во время использования сайта rang-auto.ru.</p>
+      <h3 class="text-lg font-bold text-white mt-4">1. Общие положения</h3>
+      <p>Использование сайта означает безоговорочное согласие пользователя с настоящей Политикой и указанными в ней условиями обработки его персональной информации.</p>
+      <h3 class="text-lg font-bold text-white mt-4">2. Цели обработки информации</h3>
+      <p>Персональные данные используются для связи с пользователем, подбора автомобилей и обработки заявок.</p>
+      <h3 class="text-lg font-bold text-white mt-4">3. Реквизиты оператора</h3>
+      <p>ООО «Ранг»<br>ИНН: 1655431994 / ОГРН: 1201600005771<br>Адрес офиса: г. Лида<br>Email: ooorangkazan@gmail.com</p>
     </div>
   </section>
 
@@ -724,118 +706,6 @@
       
       // Page specific logic
       
-  // Setup custom team styles
-  const style = document.createElement('style');
-  style.innerHTML = `
-    .team-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .team-img-wrapper {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease;
-      background: rgba(255,255,255,0.02);
-    }
-    .team-card:hover .team-img-wrapper {
-      transform: scale(1.08);
-      border-color: var(--accent);
-    }
-    .team-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .team-name {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-heading);
-      margin-top: 16px;
-      line-height: 1.4;
-      max-width: 180px;
-    }
-  `;
-  document.head.appendChild(style);
-
-  const loadTeam = async () => {
-    const grid = document.getElementById('team-grid');
-    if (!grid) return;
-    try {
-      const res = await fetch('/api/managers');
-      const team = await res.json();
-      grid.innerHTML = team.map(m => {
-        let linksHtml = '';
-        const telegrams = (m.telegram || '').split(',').map(s => s.trim()).filter(Boolean);
-        const whatsapps = (m.whatsapp || '').split(',').map(s => s.trim()).filter(Boolean);
-        
-        if (telegrams.length > 0 || whatsapps.length > 0) {
-          let buttons = [];
-          const maxLen = Math.max(telegrams.length, whatsapps.length);
-          for (let i = 0; i < maxLen; i++) {
-            if (telegrams[i]) {
-              buttons.push(`
-                <a href="${telegrams[i]}" target="_blank" title="Telegram" style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:rgba(0,136,204,0.12); color:#0088cc; transition:all 0.2s;" onmouseover="this.style.background='#0088cc';this.style.color='#fff';" onmouseout="this.style.background='rgba(0,136,204,0.12)';this.style.color='#0088cc';">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                </a>
-              `);
-            }
-            if (whatsapps[i]) {
-              const secUrl = whatsapps[i];
-              const isMax = secUrl.includes('max.ru');
-              const isWa = secUrl.includes('wa.me') || secUrl.includes('whatsapp.com');
-              
-              if (isMax) {
-                buttons.push(`
-                  <a href="${secUrl}" target="_blank" title="Max Chat" style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:rgba(255,42,53,0.12); color:var(--accent); transition:all 0.2s;" onmouseover="this.style.background='var(--accent)';this.style.color='#fff';" onmouseout="this.style.background='rgba(255,42,53,0.12)';this.style.color='var(--accent)';">
-                    <svg width="14" height="14" viewBox="0 0 42 42" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.47 41.88c-4.11 0-6.02-.6-9.34-3-2.1 2.7-8.75 4.81-9.04 1.2 0-2.71-.6-5-1.28-7.5C1 29.5.08 26.07.08 21.1.08 9.23 9.82.3 21.36.3c11.55 0 20.6 9.37 20.6 20.91a20.6 20.6 0 0 1-20.49 20.67m.17-31.32c-5.62-.29-10 3.6-10.97 9.7-.8 5.05.62 11.2 1.83 11.52.58.14 2.04-1.04 2.95-1.95a10.4 10.4 0 0 0 5.08 1.81 10.7 10.7 0 0 0 11.19-9.97 10.7 10.7 0 0 0-10.08-11.1Z"/></svg>
-                  </a>
-                `);
-              } else if (isWa) {
-                buttons.push(`
-                  <a href="${secUrl}" target="_blank" title="WhatsApp" style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:rgba(37,211,102,0.12); color:#25D366; transition:all 0.2s;" onmouseover="this.style.background='#25D366';this.style.color='#fff';" onmouseout="this.style.background='rgba(37,211,102,0.12)';this.style.color='#25D366';">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  </a>
-                `);
-              }
-            }
-          }
-          
-          linksHtml = `
-            <div style="display:flex; gap:10px; margin-top:12px; justify-content:center; flex-wrap:wrap;">
-              ${buttons.join('')}
-            </div>
-          `;
-        }
-        
-        let imgStyle = '';
-        if (m.name.indexOf('Попова') !== -1 || m.name.indexOf('Венедиктова') !== -1 || m.name.indexOf('Иванкин') !== -1) {
-          imgStyle = 'style="object-position: center 20%;"';
-        }
-        
-        return `
-          <div class="team-card">
-            <div class="team-img-wrapper">
-              <img src="${m.image}" alt="${m.name}" class="team-img" ${imgStyle} loading="lazy" />
-            </div>
-            <h3 class="team-name">${m.name}</h3>
-            ${m.role ? `<p style="font-size:12px; color:var(--text-secondary); margin-top:4px; max-width:180px; min-height:18px;">${m.role}</p>` : ''}
-            ${linksHtml}
-          </div>
-        `;
-      }).join('');
-    } catch (err) {
-      console.error('Ошибка загрузки команды:', err);
-      grid.innerHTML = '<p class="text-gray-400 text-center col-span-5">Не удалось загрузить список сотрудников.</p>';
-    }
-  };
-  loadTeam();
-
     });
   </script>
 </body>
