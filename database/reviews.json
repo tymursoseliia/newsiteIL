@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "id": "1",
+    "name": "Александр Г.",
+    "carModel": "Mercedes-Benz GLB",
+    "type": "photo",
+    "text": "Машина приехала в идеальном состоянии, точно в оговоренные сроки. Полное сопровождение сделки и помощь с оформлением! Очень рекомендую «Ранг» за их прозрачность.",
+    "mediaUrl": "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=800&q=80",
+    "date": "15.01.2025",
+    "created_at": "2025-01-15T12:00:00+00:00"
+  },
+  {
+    "id": "2",
+    "name": "Мария К.",
+    "carModel": "Kia Sportage",
+    "type": "photo",
+    "text": "Спасибо огромное команде за отличный Sportage! Быстро подобрали подходящий вариант в Европе, подробно показывали отчеты о проверках. Очень довольна покупкой!",
+    "mediaUrl": "https://images.unsplash.com/photo-1708538784860-2646d6eb10f7?auto=format&fit=crop&w=800&q=80",
+    "date": "15.01.2025",
+    "created_at": "2025-01-15T12:00:00+00:00"
+  },
+  {
+    "id": "4",
+    "name": "Сергей П.",
+    "carModel": "Ford Puma",
+    "type": "video",
+    "text": "Обзор автомобиля Ford Puma Titanium, доставленного из Европы под ключ.",
+    "mediaUrl": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
+    "videoUrl": "https://www.youtube.com/embed/a7SgS_zQ1qY",
+    "date": "20.03.2025",
+    "created_at": "2025-03-20T14:15:00+00:00"
+  },
+  {
+    "id": "1783510674717",
+    "date": "02.02.2025",
+    "name": "TestTest Client",
+    "carModel": "Audi Q8Audi Q8",
+    "type": "photo",
+    "text": "All is super! Strongly recommend.",
+    "mediaUrl": "https://placehold.co/600x400?text=No+Photo",
+    "videoUrl": "",
+    "created_at": "2025-02-02T10:30:00+00:00"
+  }
+]
