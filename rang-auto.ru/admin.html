@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
       --bg: #080b16;
@@ -1217,38 +1218,84 @@
       }
     };
 
-    // --- FILE UPLOADS ---
+    // --- FILE UPLOADS WITH DIRECT SUPABASE SUPPORT ---
+    const SUPABASE_STORAGE_URL = 'https://bjberojkphzoebrrjssc.supabase.co';
+    const SUPABASE_STORAGE_KEY = 'sb_secret_yUWheIGkENHRyXWziM3uAQ_WYECTSe9';
+    let supabaseAdmin = null;
+    if (window.supabase) {
+      try {
+        supabaseAdmin = window.supabase.createClient(SUPABASE_STORAGE_URL, SUPABASE_STORAGE_KEY);
+      } catch (err) {
+        console.warn('Could not initialize Supabase SDK in browser:', err);
+      }
+    }
+
+    const uploadToSupabaseOrBackend = async (file) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      const ext = file.name.includes('.') ? file.name.substring(file.name.lastIndexOf('.')) : '';
+      const supabaseFilename = 'upload-' + uniqueSuffix + ext;
+
+      if (supabaseAdmin) {
+        try {
+          const { data, error } = await supabaseAdmin.storage
+            .from('uploads')
+            .upload(supabaseFilename, file, {
+              contentType: file.type || 'application/octet-stream',
+              upsert: true
+            });
+
+          if (!error) {
+            const { data: publicUrlData } = supabaseAdmin.storage
+              .from('uploads')
+              .getPublicUrl(supabaseFilename);
+            return publicUrlData.publicUrl;
+          }
+          console.warn('Direct Supabase upload returned error, trying backend fallback:', error.message);
+        } catch (err) {
+          console.warn('Direct Supabase upload exception, trying backend fallback:', err.message);
+        }
+      }
+
+      // Fallback to backend /api/upload
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
+        },
+        body: formData
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || `HTTP ${res.status}: Ошибка сервера`);
+      }
+
+      const data = await res.json();
+      return data.fileUrl;
+    };
+
     const uploadFile = async (e, type) => {
       const file = e.target.files[0];
       if (!file) return;
 
-      const formData = new FormData();
-      formData.append('file', file);
-
       try {
         showToast('Загрузка файла...');
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
-          },
-          body: formData
-        });
-        const data = await res.json();
-        
-        if (res.ok) {
-          showToast('Файл успешно загружен!');
-          const hiddenInput = document.getElementById(`${type}-media-url`) || document.getElementById(`${type}-image-url`);
-          const imgPreview = document.getElementById(`${type}-img-preview`);
-          
-          hiddenInput.value = data.fileUrl;
-          imgPreview.src = data.fileUrl;
+        const fileUrl = await uploadToSupabaseOrBackend(file);
+
+        showToast('Файл успешно загружен!');
+        const hiddenInput = document.getElementById(`${type}-media-url`) || document.getElementById(`${type}-image-url`);
+        const imgPreview = document.getElementById(`${type}-img-preview`);
+
+        if (hiddenInput) hiddenInput.value = fileUrl;
+        if (imgPreview) {
+          imgPreview.src = fileUrl;
           imgPreview.style.display = 'block';
-        } else {
-          showToast(data.error || 'Ошибка загрузки файла', true);
         }
       } catch (err) {
-        showToast('Не удалось загрузить файл', true);
+        console.error('File upload error:', err);
+        showToast('Не удалось загрузить файл: ' + (err.message || 'ошибка сети'), true);
       }
     };
 
@@ -1256,30 +1303,17 @@
       const file = e.target.files[0];
       if (!file) return;
 
-      const formData = new FormData();
-      formData.append('file', file);
-
       try {
         showToast('Загрузка видеофайла...');
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
-          },
-          body: formData
-        });
-        const data = await res.json();
-        
-        if (res.ok) {
-          showToast('Видеофайл успешно загружен!');
-          document.getElementById('review-uploaded-video-url').value = data.fileUrl;
-          document.getElementById('review-video-filename').textContent = file.name + ' (загружено)';
-          document.getElementById('review-video-filename').style.color = '#10b981';
-        } else {
-          showToast(data.error || 'Ошибка загрузки видео', true);
-        }
+        const fileUrl = await uploadToSupabaseOrBackend(file);
+
+        showToast('Видеофайл успешно загружен!');
+        document.getElementById('review-uploaded-video-url').value = fileUrl;
+        document.getElementById('review-video-filename').textContent = file.name + ' (загружено)';
+        document.getElementById('review-video-filename').style.color = '#10b981';
       } catch (err) {
-        showToast('Не удалось загрузить видео', true);
+        console.error('Video upload error:', err);
+        showToast('Не удалось загрузить видео: ' + (err.message || 'ошибка сети'), true);
       }
     };
   </script>
