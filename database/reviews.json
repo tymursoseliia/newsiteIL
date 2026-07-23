@@ -1,1 +1,178 @@
-[]
+[
+  {
+    "id": "1784792694345",
+    "name": "Алексей",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784792678987-417197521.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784792676419-479513805.MOV",
+    "date": "14.02.2025",
+    "created_at": "2025-02-14T12:00:00.000Z"
+  },
+  {
+    "id": "1784792807006",
+    "name": "Дарья",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784792758553-884588160.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784792755978-717186361.MP4",
+    "date": "03.04.2025",
+    "created_at": "2025-04-03T12:00:00.000Z"
+  },
+  {
+    "id": "1784792907982",
+    "name": "Лариса",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784792822764-719720558.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784792803443-409604103.MP4",
+    "date": "18.05.2025",
+    "created_at": "2025-05-18T12:00:00.000Z"
+  },
+  {
+    "id": "1784792962508",
+    "name": "Виктория",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784792932780-469259774.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784792940681-333524768.MOV",
+    "date": "29.06.2025",
+    "created_at": "2025-06-29T12:00:00.000Z"
+  },
+  {
+    "id": "1784792998473",
+    "name": "Анжелика",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784792968666-905585461.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784792978784-221584651.MOV",
+    "date": "12.08.2025",
+    "created_at": "2025-08-12T12:00:00.000Z"
+  },
+  {
+    "id": "1784793030980",
+    "name": "Андрей",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793002683-891792409.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793009385-427960915.MP4",
+    "date": "05.10.2025",
+    "created_at": "2025-10-05T12:00:00.000Z"
+  },
+  {
+    "id": "1784793174745",
+    "name": "Юрий",
+    "carModel": "",
+    "type": "photo",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793036200-472105451.jpg",
+    "videoUrl": "",
+    "date": "21.11.2025",
+    "created_at": "2025-11-21T12:00:00.000Z"
+  },
+  {
+    "id": "1784793207906",
+    "name": "Зинаида",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793183980-565729659.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793188094-674544716.MOV",
+    "date": "09.12.2025",
+    "created_at": "2025-12-09T12:00:00.000Z"
+  },
+  {
+    "id": "1784793239682",
+    "name": "Василий",
+    "carModel": "",
+    "type": "photo",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793230494-640886166.jpg",
+    "videoUrl": "",
+    "date": "16.01.2026",
+    "created_at": "2026-01-16T12:00:00.000Z"
+  },
+  {
+    "id": "1784793286793",
+    "name": "Анна",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793253140-171283032.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793264235-56926430.MOV",
+    "date": "04.02.2026",
+    "created_at": "2026-02-04T12:00:00.000Z"
+  },
+  {
+    "id": "1784793335771",
+    "name": "Юлия",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793298620-38039160.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793309543-467661075.MP4",
+    "date": "19.03.2026",
+    "created_at": "2026-03-19T12:00:00.000Z"
+  },
+  {
+    "id": "1784793386636",
+    "name": "Александра",
+    "carModel": "",
+    "type": "photo",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793340570-764294999.jpg",
+    "videoUrl": "",
+    "date": "11.04.2026",
+    "created_at": "2026-04-11T12:00:00.000Z"
+  },
+  {
+    "id": "1784793465108",
+    "name": "Кристина",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793418382-294230611.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793432616-218225583.MOV",
+    "date": "02.05.2026",
+    "created_at": "2026-05-02T12:00:00.000Z"
+  },
+  {
+    "id": "1784793493987",
+    "name": "Елена",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793474582-169328801.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793477025-804434396.MOV",
+    "date": "24.05.2026",
+    "created_at": "2026-05-24T12:00:00.000Z"
+  },
+  {
+    "id": "1784793573905",
+    "name": "Оксана",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793508590-321259455.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793512563-324973890.MOV",
+    "date": "15.06.2026",
+    "created_at": "2026-06-15T12:00:00.000Z"
+  },
+  {
+    "id": "1784793645109",
+    "name": "Дмитрий",
+    "carModel": "",
+    "type": "video",
+    "text": "",
+    "mediaUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793606450-890993337.jpg",
+    "videoUrl": "https://bjberojkphzoebrrjssc.supabase.co/storage/v1/object/public/uploads/upload-1784793616339-268055414.MOV",
+    "date": "10.07.2026",
+    "created_at": "2026-07-10T12:00:00.000Z"
+  }
+]
