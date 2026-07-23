@@ -97,71 +97,6 @@ function generatePage(title, activeNav, breadcrumb, bodyContent, scriptContent) 
     ${footerHtml}
   </footer>
 
-  <!-- Privacy Policy Modal -->
-  <div id="privacy-modal" class="fixed inset-0 z-[1000] flex items-center justify-center p-3 sm:p-5 md:p-8 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 overflow-y-auto min-h-screen">
-    <div class="relative w-full max-w-3xl bg-[#0c1020] border border-white/10 rounded-2xl shadow-2xl p-4 sm:p-6 md:p-7 flex flex-col max-h-[88vh] sm:max-h-[85vh] my-auto">
-      <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4 shrink-0">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-red-600/10 border border-red-500/20 flex items-center justify-center text-red-500 shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-          </div>
-          <div>
-            <h3 class="text-lg sm:text-xl font-bold text-white leading-snug">Политика конфиденциальности</h3>
-            <p class="text-xs text-gray-400">ООО «Автоспутник»</p>
-          </div>
-        </div>
-        <button id="privacy-modal-close" class="text-gray-400 hover:text-white p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-all shrink-0 cursor-pointer" aria-label="Закрыть">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-      </div>
-      
-      <div class="overflow-y-auto pr-2 sm:pr-4 text-xs sm:text-sm text-gray-300 leading-relaxed space-y-4 custom-scrollbar flex-1 min-h-0 overscroll-contain">
-        <p class="text-gray-200 font-medium">Настоящая Политика конфиденциальности персональных данных (далее – Политика) действует в отношении всей информации, которую <strong>ООО «Автоспутник»</strong> может получить о пользователе во время использования сайта.</p>
-        
-        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/5 space-y-1.5 text-xs sm:text-sm">
-          <div class="text-gray-400">Оператор данных: <strong class="text-white">ООО «Автоспутник»</strong></div>
-          <div class="text-gray-400">ИНН: <strong class="text-white">3443140210</strong> | ОГРН: <strong class="text-white">1183443013115</strong></div>
-          <div class="text-gray-400">Юридический адрес: <strong class="text-white">400075, Волгоградская обл., г. Волгоград, ул. Историческая, д. 140А, офис 1</strong></div>
-          <div class="text-gray-400">Фактический адрес офиса: <strong class="text-white">г. Лида</strong></div>
-          <div class="text-gray-400">Контактный Email: <a href="mailto:avtosputnickv@ya.ru" class="text-red-400 hover:underline font-semibold">avtosputnickv@ya.ru</a></div>
-        </div>
-
-        <h4 class="font-bold text-white text-sm sm:text-base mt-4 pt-1 border-t border-white/5">1. Общие положения</h4>
-        <p>1.1. Использование сайта пользователем означает полное согласие с настоящей Политикой конфиденциальности и условиями обработки персональных данных пользователя.</p>
-        <p>1.2. В случае несогласия с условиями Политики конфиденциальности пользователь должен прекратить использование сайта.</p>
-        <p>1.3. Настоящая Политика применяется ко всем разделам и сервисам сайта, включая онлайн-каталог, формы обратной связи и заявки на подбор автомобилей.</p>
-        
-        <h4 class="font-bold text-white text-sm sm:text-base mt-4 pt-1 border-t border-white/5">2. Предмет и цели обработки персональных данных</h4>
-        <p>2.1. Персональные данные, разрешённые к обработке в рамках настоящей Политики, предоставляются пользователем путем заполнения регистрационных форм и заявок на сайте и могут включать:</p>
-        <ul class="list-disc list-inside space-y-1 pl-2 text-gray-300">
-          <li>Фамилию, имя, отчество;</li>
-          <li>Контактный номер телефона;</li>
-          <li>Адрес электронной почты (e-mail);</li>
-          <li>Информация о запрашиваемом автомобиле (марка, модель, год выпуска, бюджет).</li>
-        </ul>
-        <p>2.2. Обработка данных осуществляется в целях идентификации пользователя, связи для консультации, оформления договора, организации доставки и расчёта стоимости автомобиля.</p>
-
-        <h4 class="font-bold text-white text-sm sm:text-base mt-4 pt-1 border-t border-white/5">3. Защита и конфиденциальность информации</h4>
-        <p>3.1. ООО «Автоспутник» принимает необходимые технические и организационные меры для обеспечения безопасности персональных данных от несанкционированного доступа, изменения, раскрытия или уничтожения.</p>
-        <p>3.2. Персональная информация пользователя никому не передается, за исключением случаев, напрямую предусмотренных действующим законодательством РФ.</p>
-
-        <h4 class="font-bold text-white text-sm sm:text-base mt-4 pt-1 border-t border-white/5">4. Права пользователя</h4>
-        <p>4.1. Пользователь имеет право на получение информации, касающейся обработки его персональных данных, а также на их уточнение, блокирование или уничтожение.</p>
-        <p>4.2. Пользователь в любой момент может отозвать своё согласие на обработку данных, направив письменное обращение на адрес электронной почты: <a href="mailto:avtosputnickv@ya.ru" class="text-red-400 hover:underline font-semibold">avtosputnickv@ya.ru</a>.</p>
-        
-        <h4 class="font-bold text-white text-sm sm:text-base mt-4 pt-1 border-t border-white/5">5. Заключительные положения</h4>
-        <p>5.1. Оператор вправе вносить изменения в настоящую Политику конфиденциальности без предварительного согласия пользователя.</p>
-        <p>5.2. Новая Политика конфиденциальности вступает в силу с момента ее размещения на сайте.</p>
-      </div>
-
-      <div class="pt-4 border-t border-white/10 mt-4 flex flex-col sm:flex-row items-center justify-between shrink-0 gap-3">
-        <span class="text-xs text-gray-400 font-medium hidden sm:inline">© 2026 ООО «Автоспутник»</span>
-        <button id="privacy-modal-btn-close" class="w-full sm:w-auto px-6 py-2.5 bg-red-600 hover:bg-red-500 active:scale-95 text-white font-semibold text-xs sm:text-sm rounded-xl transition-all shadow-lg shadow-red-600/20 cursor-pointer">Понятно</button>
-      </div>
-    </div>
-  </div>
-
-  
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       // Toggle behavior for mobile menu
@@ -198,38 +133,6 @@ function generatePage(title, activeNav, breadcrumb, bodyContent, scriptContent) 
           });
         });
       }
-
-      
-  // Privacy Modal Handlers
-  const privacyModal = document.getElementById('privacy-modal');
-  const privacyClose1 = document.getElementById('privacy-modal-close');
-  const privacyClose2 = document.getElementById('privacy-modal-btn-close');
-
-  const openPrivacyModal = (e) => {
-    if (e) e.preventDefault();
-    if (privacyModal) {
-      privacyModal.classList.remove('opacity-0', 'pointer-events-none');
-    }
-  };
-
-  const closePrivacyModal = () => {
-    if (privacyModal) {
-      privacyModal.classList.add('opacity-0', 'pointer-events-none');
-    }
-  };
-
-  document.querySelectorAll('a[href*="privacy"]').forEach(link => {
-    link.addEventListener('click', openPrivacyModal);
-  });
-
-  if (privacyClose1) privacyClose1.addEventListener('click', closePrivacyModal);
-  if (privacyClose2) privacyClose2.addEventListener('click', closePrivacyModal);
-
-  if (privacyModal) {
-    privacyModal.addEventListener('click', (e) => {
-      if (e.target === privacyModal) closePrivacyModal();
-    });
-  }
 
       // Fade-in effect
       const wrapper = document.getElementById('main-content-wrapper');
@@ -835,14 +738,25 @@ console.log('Successfully completed multi-page migration!');
 // 5. PRIVACY PAGE
 // -------------------------------------------------------------
 const privacyBody = `
-  <section class="py-10 sm:py-14 max-w-4xl mx-auto px-4">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="w-12 h-12 rounded-2xl bg-red-600/10 border border-red-500/20 flex items-center justify-center text-red-500 shrink-0">
+  <section class="py-8 sm:py-12 max-w-4xl mx-auto px-4">
+    <!-- Top Back Button -->
+    <div class="mb-6 flex items-center justify-between">
+      <a href="/" class="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-red-500/30 text-white font-medium text-xs sm:text-sm transition-all shadow-lg active:scale-95 cursor-pointer">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <span>Назад на главную</span>
+      </a>
+      <span class="text-xs text-gray-400 font-medium hidden sm:inline">ООО «Автоспутник»</span>
+    </div>
+
+    <div class="flex items-center gap-3.5 mb-6">
+      <div class="w-12 h-12 rounded-2xl bg-red-600/10 border border-red-500/20 flex items-center justify-center text-red-500 shrink-0 shadow-lg shadow-red-600/10">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
       </div>
       <div>
         <h1 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">Политика конфиденциальности</h1>
-        <p class="text-sm text-gray-400 mt-1">ООО «Автоспутник» — защита персональных данных</p>
+        <p class="text-xs sm:text-sm text-gray-400 mt-1">Официальные условия обработки персональных данных ООО «Автоспутник»</p>
       </div>
     </div>
 
@@ -870,6 +784,16 @@ const privacyBody = `
 
       <h3 class="text-lg sm:text-xl font-bold text-white pt-2 border-t border-white/10">4. Реквизиты оператора</h3>
       <p>ООО «Автоспутник»<br>ИНН: 3443140210 / ОГРН: 1183443013115<br>Юридический адрес: 400075, Волгоградская обл., г. Волгоград, ул. Историческая, д. 140А, офис 1<br>Адрес офиса: г. Лида<br>Email: avtosputnickv@ya.ru</p>
+
+      <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <a href="/" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-lg shadow-red-600/20 active:scale-95 cursor-pointer">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          <span>Вернуться на главную страницу</span>
+        </a>
+        <span class="text-xs text-gray-400">© 2026 ООО «Автоспутник»</span>
+      </div>
     </div>
   </section>
 `;

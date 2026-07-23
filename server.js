@@ -69,6 +69,9 @@ app.get('/about', (req, res) => {
 app.get('/contacts', (req, res) => {
   res.sendFile(path.join(__dirname, 'rang-auto.ru', 'contacts.html'));
 });
+app.get('/privacy', (req, res) => {
+  res.sendFile(path.join(__dirname, 'rang-auto.ru', 'privacy.html'));
+});
 
 // Configure Multer for file uploads
 const storage = multer.diskStorage({
