@@ -1313,7 +1313,7 @@
               
               ${r.mediaUrl ? `
               <div class="relative rounded-xl overflow-hidden aspect-video border border-white/5 group ${hasVideo ? 'cursor-pointer video-card' : ''}" ${hasVideo ? `data-video="${r.videoUrl}"` : ''}>
-                <img src="${r.mediaUrl}" alt="Отзыв ${r.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                <img src="${r.mediaUrl}" alt="Отзыв ${r.name}" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" style="object-position: top center;">
                 ${hasVideo ? `
                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-all">
                   <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg shadow-red-600/30 transform group-hover:scale-110 transition-transform">
